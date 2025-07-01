@@ -17,28 +17,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="440" height="956"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" image="shift-logo" translatesAutoresizingMaskIntoConstraints="NO" id="sy7-i5-fww">
-                                <rect key="frame" x="135.66666666666666" y="425.66666666666669" width="168.99999999999997" height="105.00000000000006"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="shift-logo" translatesAutoresizingMaskIntoConstraints="NO" id="sy7-i5-fww">
+                                <rect key="frame" x="40" y="222" width="360" height="512"/>
                                 <rect key="contentStretch" x="1" y="0.0" width="0.0" height="0.0"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="sy7-i5-fww" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="28n-xH-TBP"/>
-                            <constraint firstItem="sy7-i5-fww" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="IQn-f1-fZE"/>
-                            <constraint firstItem="sy7-i5-fww" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="aCc-1N-kif"/>
-                            <constraint firstItem="sy7-i5-fww" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="t6q-h6-47n"/>
+                            <constraint firstItem="sy7-i5-fww" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="F1X-Io-PNr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sy7-i5-fww" secondAttribute="trailing" constant="20" id="bDy-ik-chf"/>
+                            <constraint firstItem="sy7-i5-fww" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="20" id="mkX-jF-k77"/>
+                            <constraint firstItem="sy7-i5-fww" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="vB3-dz-u0n"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="52.671755725190835" y="374.64788732394368"/>
+            <point key="canvasLocation" x="51.81818181818182" y="374.05857740585776"/>
         </scene>
     </scenes>
     <resources>
-        <image name="shift-logo" width="169" height="105"/>
+        <image name="shift-logo" width="512" height="512"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
