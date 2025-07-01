@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "shift-icon-light.png",
+      "filename" : "shift-logo-icon-any.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -13,7 +13,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "shift-icon-dark.png",
+      "filename" : "shift-logo-icon-dark.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -25,7 +25,7 @@
           "value" : "tinted"
         }
       ],
-      "filename" : "shift-icon-tint.png",
+      "filename" : "shift-logo-icon-tint.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
