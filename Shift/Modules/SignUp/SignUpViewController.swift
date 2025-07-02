@@ -29,10 +29,10 @@ final class SignUpViewController: UIViewController {
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
 
-        let titleLabel = createTitleLabel(text: "Регистрация")
-        container.addSubview(titleLabel)
+        let screenTitleLabel = createScreenTitleLabel()
+        container.addSubview(screenTitleLabel)
 
-        titleLabel.snp.makeConstraints { make in
+        screenTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(container.layoutMarginsGuide.snp.top)
             make.leading.equalTo(container.layoutMarginsGuide.snp.leading)
             make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
@@ -42,7 +42,7 @@ final class SignUpViewController: UIViewController {
         container.addSubview(scrollView)
 
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(40)
+            make.top.equalTo(screenTitleLabel.snp.bottom).offset(40)
             make.bottom.equalTo(container.layoutMarginsGuide.snp.bottom)
             make.leading.equalTo(container.layoutMarginsGuide.snp.leading)
             make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
@@ -56,59 +56,30 @@ final class SignUpViewController: UIViewController {
             make.width.equalTo(scrollView)
         }
 
-        let nameTextField = createTextField(
-            placeholder: "Имя",
-            textContentType: .name
-        )
+        let nameTextField = createNameTextField()
         stackView.addArrangedSubview(nameTextField)
 
-        let surnameTextField = createTextField(
-            placeholder: "Фамилия",
-            textContentType: .familyName
-        )
-
+        let surnameTextField = createSurnameTextField()
         stackView.addArrangedSubview(surnameTextField)
 
-        dateOfBirthTextField = createTextField(
-            placeholder: "Дата рождения",
-            textContentType: nil
-        )
+        dateOfBirthTextField = createDateOfBirthTextField()
 
-        dateOfBirthTextField?.setDatePickerAsInputViewFor(
-            target: self,
-            selector: #selector(dateSelected)
-        )
+        if let dateOfBirthTextField {
+            dateOfBirthTextField.setDatePickerAsInputViewFor(
+                target: self,
+                selector: #selector(dateSelected)
+            )
 
-        stackView.addArrangedSubview(dateOfBirthTextField!)
+            stackView.addArrangedSubview(dateOfBirthTextField)
+        }
 
-        let passwordTextField = createTextField(
-            placeholder: "Пароль",
-            textContentType: .password,
-            autoCapitalization: .none,
-            autocorrectionType: .no,
-            isSecure: true
-        )
-
+        let passwordTextField = createPasswordTextField()
         stackView.addArrangedSubview(passwordTextField)
 
-        let acceptPasswordTextField = createTextField(
-            placeholder: "Подтвердите пароль",
-            textContentType: .password,
-            autoCapitalization: .none,
-            autocorrectionType: .no,
-            returnKeyType: .done,
-            isSecure: true
-        )
-
+        let acceptPasswordTextField = createAcceptPasswordTextField()
         stackView.addArrangedSubview(acceptPasswordTextField)
 
-        let buttonHeight: CGFloat = 40
-
-        let signUpButton = createButton(
-            title: "Зарегистрироваться",
-            cornerRadius: buttonHeight / 2
-        )
-
+        let (buttonHeight, signUpButton) = createSignUpButton()
         container.addSubview(signUpButton)
 
         signUpButton.snp.makeConstraints { make in
@@ -118,10 +89,71 @@ final class SignUpViewController: UIViewController {
             make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
         }
     }
-
 }
 
-// MARK: - UI components
+// MARK: - UI components implementation
+extension SignUpViewController {
+
+    private func createScreenTitleLabel() -> UILabel {
+        createTitleLabel(text: "Регистрация")
+    }
+
+    private func createNameTextField() -> UITextField {
+        createTextField(
+            placeholder: "Имя",
+            textContentType: .name
+        )
+    }
+
+    private func createSurnameTextField() -> UITextField {
+        createTextField(
+            placeholder: "Фамилия",
+            textContentType: .familyName
+        )
+    }
+
+    private func createDateOfBirthTextField() -> UITextField {
+        createTextField(
+            placeholder: "Дата рождения",
+            textContentType: nil
+        )
+    }
+
+    private func createPasswordTextField() -> UITextField {
+        createTextField(
+            placeholder: "Пароль",
+            textContentType: .password,
+            autoCapitalization: .none,
+            autocorrectionType: .no,
+            isSecure: true
+        )
+    }
+
+    private func createAcceptPasswordTextField() -> UITextField {
+        createTextField(
+            placeholder: "Подтвердите пароль",
+            textContentType: .password,
+            autoCapitalization: .none,
+            autocorrectionType: .no,
+            returnKeyType: .done,
+            isSecure: true
+        )
+    }
+
+    private func createSignUpButton() -> (buttonHeight: CGFloat, button: UIButton) {
+        let buttonHeight: CGFloat = 40
+
+        return (
+            buttonHeight: buttonHeight,
+            button: createButton(
+                title: "Зарегистрироваться",
+                cornerRadius: buttonHeight / 2
+            )
+        )
+    }
+}
+
+// MARK: - UI components bases
 
 extension SignUpViewController {
 
@@ -195,13 +227,19 @@ extension SignUpViewController {
         return textField
     }
 
-    private func createButton(title: String, cornerRadius: CGFloat = 0) -> UIButton {
+    private func createButton(
+        title: String,
+        cornerRadius: CGFloat = 0,
+        isEnabled: Bool = true
+    ) -> UIButton {
         let button = UIButton(type: .system)
+        button.layer.cornerRadius = cornerRadius
         button.setTitle(title, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
+        button.isEnabled = isEnabled
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = cornerRadius
+        button.setTitleColor(.lightGray, for: .disabled)
+        button.backgroundColor = isEnabled ? .systemBlue : .gray
 
         return button
     }
@@ -216,11 +254,7 @@ extension SignUpViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ru_RU")
         dateFormatter.dateStyle = .medium
-
-        field.text = dateFormatter.string(
-            from: datePicker.date
-        )
-
+        field.text = dateFormatter.string(from: datePicker.date)
         field.resignFirstResponder()
     }
 }
