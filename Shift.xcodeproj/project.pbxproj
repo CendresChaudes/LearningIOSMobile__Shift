@@ -103,6 +103,7 @@
 				B22F13092E14574A005D339C /* SwiftLint */,
 				B25DBB2F2E14245E0077CB8F /* Frameworks */,
 				B25DBB302E14245E0077CB8F /* Resources */,
+				037F161D788D5F812B5E82BB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -163,6 +164,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		037F161D788D5F812B5E82BB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Shift/Pods-Shift-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Shift/Pods-Shift-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Shift/Pods-Shift-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3EB0A5D1F1559375944E6C10 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
