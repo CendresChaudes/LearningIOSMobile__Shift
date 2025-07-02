@@ -26,12 +26,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
 
     // MARK: - UISceneSession Lifecycle
+
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
 
-        let rootViewController = TestViewController()
+        let rootViewController = SignUpViewController()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
@@ -40,10 +41,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     // MARK: - Core Data
+
     func saveContext() {
         let context = persistentContainer.viewContext
 
-        if     context.hasChanges {
+        if context.hasChanges {
             do {
                 try context.save()
             } catch {
