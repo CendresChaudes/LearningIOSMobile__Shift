@@ -39,7 +39,7 @@ final class SignUpViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .white
 
-        let container = createContainer()
+        let container = CustomScreenContainerView()
         view.addSubview(container)
 
         container.snp.makeConstraints { make in
@@ -291,21 +291,6 @@ extension SignUpViewController {
 // MARK: - UI components bases
 
 extension SignUpViewController {
-
-    private func createContainer() -> UIView {
-        let container = UIView()
-        let verticalSpacing: CGFloat = 20
-        let horizontalSpacing: CGFloat = 16
-
-        container.layoutMargins = UIEdgeInsets(
-            top: verticalSpacing,
-            left: horizontalSpacing,
-            bottom: verticalSpacing,
-            right: horizontalSpacing
-        )
-
-        return container
-    }
 
     private func createStackView(spacing: CGFloat, items: [UIView] = []) -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: items)
