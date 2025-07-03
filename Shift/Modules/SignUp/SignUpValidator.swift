@@ -92,7 +92,7 @@ final class SignUpValidator {
         return errorMessage
     }
 
-    static func validatePasswordValidTextField(password: String) -> String? {
+    static func validatePasswordTextField(password: String) -> String? {
         let trimmedValue = trimWhitespaces(from: password)
 
         let regex = passwordRegex
@@ -118,7 +118,9 @@ final class SignUpValidator {
         return errorMessage
     }
 
-    static func validateConfirmPasswordValid(password: String, confirmPassword: String) -> String? {
+    static func validateConfirmPasswordTextField(password: String, confirmPassword: String)
+        -> String?
+    {
         password == confirmPassword ? nil : "Пароли не совпадают"
     }
 

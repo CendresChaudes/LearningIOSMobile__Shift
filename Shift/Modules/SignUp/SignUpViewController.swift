@@ -210,35 +210,56 @@ extension SignUpViewController {
 extension SignUpViewController {
 
     private func validateFields() {
-        guard
-            let nameValue = nameTextField.text, !nameValue.isEmpty,
-            let surnameValue = surnameTextField.text, !surnameValue.isEmpty,
-            let dateOfBirthValue = dateOfBirthTextField.text, !dateOfBirthValue.isEmpty,
-            let passwordValue = passwordTextField.text, !passwordValue.isEmpty,
-            let confirmPasswordValue = confirmPasswordTextField.text, !confirmPasswordValue.isEmpty
-        else {
-            return
-        }
+        validateNameTextField()
+        validateSurnameTextField()
+        validateDateOfBirthTextField()
+        validatePasswordTextField()
+        validateConfirmPasswordTextField()
+    }
+
+    private func validateNameTextField() {
+        guard let nameValue = nameTextField.text, !nameValue.isEmpty else { return }
 
         nameTextFieldErrorLabel.text = validator.validateNameTextField(name: nameValue)
         nameTextFieldErrorLabel.isHidden = nameTextFieldErrorLabel.text == nil
+    }
+
+    private func validateSurnameTextField() {
+        guard let surnameValue = surnameTextField.text, !surnameValue.isEmpty else { return }
 
         surnameTextFieldErrorLabel.text = validator.validateSurnameTextField(surname: surnameValue)
         surnameTextFieldErrorLabel.isHidden = surnameTextFieldErrorLabel.text == nil
+    }
+
+    private func validateDateOfBirthTextField() {
+        guard let dateOfBirthValue = dateOfBirthTextField.text, !dateOfBirthValue.isEmpty else {
+            return
+        }
 
         dateOfBirthTextFieldErrorLabel.text = validator.validateDateOfBirthTextField(
             dateOfBirth: dateOfBirthValue
         )
 
         dateOfBirthTextFieldErrorLabel.isHidden = dateOfBirthTextFieldErrorLabel.text == nil
+    }
 
-        passwordTextFieldErrorLabel.text = validator.validatePasswordValidTextField(
+    private func validatePasswordTextField() {
+        guard let passwordValue = passwordTextField.text, !passwordValue.isEmpty else { return }
+
+        passwordTextFieldErrorLabel.text = validator.validatePasswordTextField(
             password: passwordValue
         )
 
         passwordTextFieldErrorLabel.isHidden = passwordTextFieldErrorLabel.text == nil
+    }
 
-        confirmPasswordTextFieldErrorLabel.text = validator.validateConfirmPasswordValid(
+    private func validateConfirmPasswordTextField() {
+        guard
+            let passwordValue = surnameTextField.text, !passwordValue.isEmpty,
+            let confirmPasswordValue = passwordTextField.text, !confirmPasswordValue.isEmpty
+        else { return }
+
+        confirmPasswordTextFieldErrorLabel.text = validator.validateConfirmPasswordTextField(
             password: passwordValue,
             confirmPassword: confirmPasswordValue
         )
