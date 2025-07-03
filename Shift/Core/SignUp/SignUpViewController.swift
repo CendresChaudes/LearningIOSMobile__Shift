@@ -135,7 +135,7 @@ extension SignUpViewController {
         nameTextField.textContentType = .name
 
         nameTextFieldErrorLabel = CustomErrorLabel()
-        nameTextFieldErrorLabel.isHidden = false
+        nameTextFieldErrorLabel.isHidden = true
 
         return createFieldStackView(for: [nameTextField, nameTextFieldErrorLabel])
     }
@@ -150,7 +150,7 @@ extension SignUpViewController {
         surnameTextField.textContentType = .familyName
 
         surnameTextFieldErrorLabel = CustomErrorLabel()
-        surnameTextFieldErrorLabel.isHidden = false
+        surnameTextFieldErrorLabel.isHidden = true
 
         return createFieldStackView(for: [surnameTextField, surnameTextFieldErrorLabel])
     }
@@ -168,7 +168,7 @@ extension SignUpViewController {
         )
 
         dateOfBirthTextFieldErrorLabel = CustomErrorLabel()
-        dateOfBirthTextFieldErrorLabel.isHidden = false
+        dateOfBirthTextFieldErrorLabel.isHidden = true
 
         return createFieldStackView(for: [dateOfBirthTextField, dateOfBirthTextFieldErrorLabel])
     }
@@ -184,7 +184,7 @@ extension SignUpViewController {
         passwordTextField.isSecureTextEntry = true
 
         passwordTextFieldErrorLabel = CustomErrorLabel()
-        passwordTextFieldErrorLabel.isHidden = false
+        passwordTextFieldErrorLabel.isHidden = true
 
         return createFieldStackView(for: [passwordTextField, passwordTextFieldErrorLabel])
     }
@@ -200,7 +200,7 @@ extension SignUpViewController {
         confirmPasswordTextField.isSecureTextEntry = true
 
         confirmPasswordTextFieldErrorLabel = CustomErrorLabel()
-        confirmPasswordTextFieldErrorLabel.isHidden = false
+        confirmPasswordTextFieldErrorLabel.isHidden = true
 
         return createFieldStackView(for: [
             confirmPasswordTextField, confirmPasswordTextFieldErrorLabel,
