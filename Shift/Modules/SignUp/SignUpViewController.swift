@@ -46,7 +46,7 @@ final class SignUpViewController: UIViewController {
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
 
-        let screenTitleLabel = createScreenTitleLabel()
+        let screenTitleLabel = CustomScreenTitleLabel(title: "Регистрация")
         container.addSubview(screenTitleLabel)
 
         screenTitleLabel.snp.makeConstraints { make in
@@ -99,15 +99,6 @@ extension SignUpViewController {
                 createConfirmPasswordTextFieldStackView(),
             ]
         )
-    }
-
-    private func createScreenTitleLabel() -> UILabel {
-        let label = UILabel()
-        label.text = "Регистрация"
-        label.textAlignment = .center
-        label.font = .systemFont(ofSize: 32, weight: .bold)
-        
-        return label
     }
 
     private func createErrorLabel(text: String) -> UILabel {
