@@ -114,8 +114,9 @@ extension SignUpViewController {
             placeholder: "Имя",
         )
 
-        nameTextField.textContentType = .name
+        nameTextField.delegate = self
         nameTextField.returnKeyType = .next
+        nameTextField.textContentType = .name
 
         nameTextFieldErrorLabel = CustomErrorLabel()
         nameTextFieldErrorLabel.isHidden = false
@@ -128,8 +129,9 @@ extension SignUpViewController {
             placeholder: "Фамилия",
         )
 
-        surnameTextField.textContentType = .familyName
+        surnameTextField.delegate = self
         surnameTextField.returnKeyType = .next
+        surnameTextField.textContentType = .familyName
 
         surnameTextFieldErrorLabel = CustomErrorLabel()
         surnameTextFieldErrorLabel.isHidden = false
@@ -143,7 +145,6 @@ extension SignUpViewController {
         )
 
         dateOfBirthTextField.textContentType = nil
-        dateOfBirthTextField.returnKeyType = .next
 
         dateOfBirthTextField.setDatePickerAsInputViewFor(
             target: self,
@@ -161,8 +162,9 @@ extension SignUpViewController {
             placeholder: "Пароль"
         )
 
-        passwordTextField.textContentType = .password
+        passwordTextField.delegate = self
         passwordTextField.returnKeyType = .next
+        passwordTextField.textContentType = .password
         passwordTextField.isSecureTextEntry = true
 
         passwordTextFieldErrorLabel = CustomErrorLabel()
@@ -176,8 +178,9 @@ extension SignUpViewController {
             placeholder: "Подтвердите пароль",
         )
 
-        passwordTextField.textContentType = .password
+        confirmPasswordTextField.delegate = self
         confirmPasswordTextField.returnKeyType = .done
+        confirmPasswordTextField.textContentType = .password
         confirmPasswordTextField.isSecureTextEntry = true
 
         confirmPasswordTextFieldErrorLabel = CustomErrorLabel()
@@ -337,5 +340,22 @@ extension SignUpViewController {
     @objc
     private func dismissKeyboard() {
         view.endEditing(true)
+    }
+}
+
+extension SignUpViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == nameTextField {
+            surnameTextField.becomeFirstResponder()
+        } else if textField == surnameTextField {
+            dateOfBirthTextField.becomeFirstResponder()
+        } else if textField == passwordTextField {
+            confirmPasswordTextField.becomeFirstResponder()
+        } else {
+            confirmPasswordTextField.resignFirstResponder()
+        }
+
+        return true
     }
 }
