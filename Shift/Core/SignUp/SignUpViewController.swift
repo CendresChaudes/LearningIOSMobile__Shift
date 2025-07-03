@@ -24,6 +24,12 @@ final class SignUpViewController: UIViewController {
     private var passwordTextFieldErrorLabel: UILabel!
     private var confirmPasswordTextFieldErrorLabel: UILabel!
 
+    private var isFieldsValid: Bool {
+        nameTextFieldErrorLabel.text == nil && surnameTextFieldErrorLabel.text == nil
+            && dateOfBirthTextFieldErrorLabel.text == nil && passwordTextFieldErrorLabel.text == nil
+            && confirmPasswordTextFieldErrorLabel.text == nil
+    }
+
     private let validator = SignUpValidator.self
 
     // MARK: - View lifecycle
@@ -210,6 +216,16 @@ extension SignUpViewController {
     @objc
     private func handleSignUpButtonTouchedUpInside() {
         validateFields()
+
+        if isFieldsValid {
+            openMainScreen()
+        }
+    }
+
+    private func openMainScreen() {
+        let mainVC = MainViewController()
+        mainVC.modalPresentationStyle = .fullScreen
+        present(mainVC, animated: true)
     }
 }
 
