@@ -9,12 +9,21 @@ import UIKit
 
 class CustomErrorLabel: UILabel {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+    init(text: String? = "") {
+        super.init(frame: .zero)
 
+        self.text = text
+        self.font = .systemFont(ofSize: 16, weight: .regular)
+        self.textColor = .red
+        self.numberOfLines = 0
+    }
+
+    @available(
+        *,
+        unavailable,
+        message: "This initializer is not available. Use init(text:) instead."
+    )
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

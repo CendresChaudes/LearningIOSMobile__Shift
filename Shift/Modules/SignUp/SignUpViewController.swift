@@ -74,7 +74,7 @@ final class SignUpViewController: UIViewController {
             make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
         }
 
-        let fieldsStackView = createFieldStackView()
+        let fieldsStackView = createFieldsStackView()
         scrollView.addSubview(fieldsStackView)
 
         fieldsStackView.snp.makeConstraints { make in
@@ -88,7 +88,7 @@ final class SignUpViewController: UIViewController {
 
 extension SignUpViewController {
 
-    private func createFieldStackView() -> UIStackView {
+    private func createFieldsStackView() -> UIStackView {
         return createStackView(
             spacing: 28,
             items: [
@@ -101,16 +101,6 @@ extension SignUpViewController {
         )
     }
 
-    private func createErrorLabel(text: String) -> UILabel {
-        let label = UILabel()
-        label.text = text
-        label.font = .systemFont(ofSize: 16, weight: .regular)
-        label.textColor = .red
-        label.numberOfLines = 0
-
-        return label
-    }
-
     private func createNameTextFieldStackView() -> UIStackView {
         let stackView = createStackView(spacing: 8)
 
@@ -119,7 +109,7 @@ extension SignUpViewController {
             textContentType: .name
         )
 
-        nameTextFieldErrorLabel = createErrorLabel(text: "")
+        nameTextFieldErrorLabel = CustomErrorLabel()
         nameTextFieldErrorLabel.isHidden = false
 
         stackView.addArrangedSubview(nameTextField)
@@ -136,7 +126,7 @@ extension SignUpViewController {
             textContentType: .familyName
         )
 
-        surnameTextFieldErrorLabel = createErrorLabel(text: "")
+        surnameTextFieldErrorLabel = CustomErrorLabel()
         surnameTextFieldErrorLabel.isHidden = false
 
         stackView.addArrangedSubview(surnameTextField)
@@ -158,7 +148,7 @@ extension SignUpViewController {
             selector: #selector(dateSelected)
         )
 
-        dateOfBirthTextFieldErrorLabel = createErrorLabel(text: "")
+        dateOfBirthTextFieldErrorLabel = CustomErrorLabel()
         dateOfBirthTextFieldErrorLabel.isHidden = false
 
         stackView.addArrangedSubview(dateOfBirthTextField)
@@ -178,7 +168,7 @@ extension SignUpViewController {
             isSecure: true
         )
 
-        passwordTextFieldErrorLabel = createErrorLabel(text: "")
+        passwordTextFieldErrorLabel = CustomErrorLabel()
         passwordTextFieldErrorLabel.isHidden = false
 
         stackView.addArrangedSubview(passwordTextField)
@@ -199,7 +189,7 @@ extension SignUpViewController {
             isSecure: true
         )
 
-        confirmPasswordTextFieldErrorLabel = createErrorLabel(text: "")
+        confirmPasswordTextFieldErrorLabel = CustomErrorLabel()
         confirmPasswordTextFieldErrorLabel.isHidden = false
 
         stackView.addArrangedSubview(confirmPasswordTextField)
