@@ -12,11 +12,10 @@ final class SignUpValidator {
     private static let onlyLettersAndSpacesRegex = "^[A-Za-zА-Яа-яЁё\\s]+$"
 
     private static let passwordRegex =
-        "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-z\\d$@$!%*?&#]+$"
+        "^(?=.*[a-zA-Zа-яА-Я])(?=.*[A-ZА-Я])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-zа-яА-Я\\d$@$!%*?&#]+$"
 
     static func validateNameTextField(name: String) -> String? {
         let trimmedValue = trimWhitespaces(from: name)
-
         let regex = onlyLettersAndSpacesRegex
         let predicate = createPredicate(for: regex)
         let isValidByRegex = predicate.evaluate(with: trimmedValue)
@@ -41,7 +40,6 @@ final class SignUpValidator {
 
     static func validateSurnameTextField(surname: String) -> String? {
         let trimmedValue = trimWhitespaces(from: surname)
-
         let regex = onlyLettersAndSpacesRegex
         let predicate = createPredicate(for: regex)
         let isValidByRegex = predicate.evaluate(with: trimmedValue)
@@ -73,10 +71,9 @@ final class SignUpValidator {
             return "Некорректный формат даты. Выберите дату из календаря"
         }
 
-        let actualAge = Calendar.current.dateComponents([.year], from: date, to: Date()).year ?? 0
-
         let minAge = 18
         let maxAge = 130
+        let actualAge = Calendar.current.dateComponents([.year], from: date, to: Date()).year ?? 0
 
         var errorMessage: String?
 
@@ -94,7 +91,6 @@ final class SignUpValidator {
 
     static func validatePasswordTextField(password: String) -> String? {
         let trimmedValue = trimWhitespaces(from: password)
-
         let regex = passwordRegex
         let predicate = createPredicate(for: regex)
         let isValidByRegex = predicate.evaluate(with: trimmedValue)
