@@ -40,6 +40,16 @@ final class SignUpViewController: UIViewController {
         setupUI()
         setupTextFieldDelegates()
         setupViewTapGesture()
+
+        setupDebug()
+    }
+    
+    // MARK: - Setup debug
+    
+    private func setupDebug() {
+        #if DEBUG
+            setupFieldsValuesForDebug()
+        #endif
     }
 }
 
@@ -95,7 +105,7 @@ extension SignUpViewController {
     }
 }
 
-// MARK: - UI components implementation
+// MARK: - UI components implementations
 
 extension SignUpViewController {
 
@@ -110,7 +120,7 @@ extension SignUpViewController {
 
         stackView.axis = .vertical
         stackView.alignment = .fill
-        stackView.spacing = 28
+        stackView.spacing = 32
 
         return stackView
     }
@@ -346,7 +356,10 @@ extension SignUpViewController {
     }
 }
 
+// MARK: - Gestures
+
 extension SignUpViewController {
+
     private func setupViewTapGesture() {
         view.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
@@ -373,5 +386,20 @@ extension SignUpViewController: UITextFieldDelegate {
         }
 
         return true
+    }
+}
+
+// MARK: - Debug
+
+extension SignUpViewController {
+
+    func setupFieldsValuesForDebug() {
+        nameTextField.text = "Роман"
+        surnameTextField.text = "Пронин"
+        dateOfBirthTextField.text = "20 марта 1997 г."
+        passwordTextField.text = "qwertyQ1!"
+        confirmPasswordTextField.text = "qwertyQ1!"
+
+        textFieldDidChange()
     }
 }
