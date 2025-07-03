@@ -30,11 +30,16 @@ final class SignUpViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         setupUI()
         setupTextFieldDelegates()
+        setupViewTapGesture()
     }
+}
 
-    // MARK: - Setup UI
+// MARK: - Setup UI
+
+extension SignUpViewController {
 
     private func setupUI() {
         view.backgroundColor = .white
@@ -308,7 +313,7 @@ extension SignUpViewController {
     }
 
     @objc
-    func dateSelected() {
+    private func dateSelected() {
         guard
             let field = dateOfBirthTextField,
             let datePicker = field.inputView as? UIDatePicker
@@ -319,5 +324,18 @@ extension SignUpViewController {
         dateFormatter.dateStyle = .medium
         field.text = dateFormatter.string(from: datePicker.date)
         field.resignFirstResponder()
+    }
+}
+
+extension SignUpViewController {
+    private func setupViewTapGesture() {
+        view.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        )
+    }
+
+    @objc
+    private func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
