@@ -89,21 +89,22 @@ final class SignUpViewController: UIViewController {
 extension SignUpViewController {
 
     private func createFieldsStackView() -> UIStackView {
-        return createStackView(
-            spacing: 28,
-            items: [
-                createNameTextFieldStackView(),
-                createSurnameTextFieldStackView(),
-                createDateOfBirthTextFieldStackView(),
-                createPasswordTextFieldStackView(),
-                createConfirmPasswordTextFieldStackView(),
-            ]
-        )
+        let stackView = UIStackView(arrangedSubviews: [
+            createNameTextFieldStackView(),
+            createSurnameTextFieldStackView(),
+            createDateOfBirthTextFieldStackView(),
+            createPasswordTextFieldStackView(),
+            createConfirmPasswordTextFieldStackView(),
+        ])
+
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.spacing = 28
+
+        return stackView
     }
 
     private func createNameTextFieldStackView() -> UIStackView {
-        let stackView = createStackView(spacing: 8)
-
         nameTextField = createTextField(
             placeholder: "Имя",
             textContentType: .name
@@ -112,15 +113,10 @@ extension SignUpViewController {
         nameTextFieldErrorLabel = CustomErrorLabel()
         nameTextFieldErrorLabel.isHidden = false
 
-        stackView.addArrangedSubview(nameTextField)
-        stackView.addArrangedSubview(nameTextFieldErrorLabel)
-
-        return stackView
+        return createFieldStackView(for: [nameTextField, nameTextFieldErrorLabel])
     }
 
     private func createSurnameTextFieldStackView() -> UIStackView {
-        let stackView = createStackView(spacing: 8)
-
         surnameTextField = createTextField(
             placeholder: "Фамилия",
             textContentType: .familyName
@@ -129,15 +125,10 @@ extension SignUpViewController {
         surnameTextFieldErrorLabel = CustomErrorLabel()
         surnameTextFieldErrorLabel.isHidden = false
 
-        stackView.addArrangedSubview(surnameTextField)
-        stackView.addArrangedSubview(surnameTextFieldErrorLabel)
-
-        return stackView
+        return createFieldStackView(for: [surnameTextField, surnameTextFieldErrorLabel])
     }
 
     private func createDateOfBirthTextFieldStackView() -> UIStackView {
-        let stackView = createStackView(spacing: 8)
-
         dateOfBirthTextField = createTextField(
             placeholder: "Дата рождения",
             textContentType: nil
@@ -151,15 +142,10 @@ extension SignUpViewController {
         dateOfBirthTextFieldErrorLabel = CustomErrorLabel()
         dateOfBirthTextFieldErrorLabel.isHidden = false
 
-        stackView.addArrangedSubview(dateOfBirthTextField)
-        stackView.addArrangedSubview(dateOfBirthTextFieldErrorLabel)
-
-        return stackView
+        return createFieldStackView(for: [dateOfBirthTextField, dateOfBirthTextFieldErrorLabel])
     }
 
     private func createPasswordTextFieldStackView() -> UIStackView {
-        let stackView = createStackView(spacing: 8)
-
         passwordTextField = createTextField(
             placeholder: "Пароль",
             textContentType: .password,
@@ -171,15 +157,10 @@ extension SignUpViewController {
         passwordTextFieldErrorLabel = CustomErrorLabel()
         passwordTextFieldErrorLabel.isHidden = false
 
-        stackView.addArrangedSubview(passwordTextField)
-        stackView.addArrangedSubview(passwordTextFieldErrorLabel)
-
-        return stackView
+        return createFieldStackView(for: [passwordTextField, passwordTextFieldErrorLabel])
     }
 
     private func createConfirmPasswordTextFieldStackView() -> UIStackView {
-        let stackView = createStackView(spacing: 8)
-
         confirmPasswordTextField = createTextField(
             placeholder: "Подтвердите пароль",
             textContentType: .password,
@@ -192,10 +173,9 @@ extension SignUpViewController {
         confirmPasswordTextFieldErrorLabel = CustomErrorLabel()
         confirmPasswordTextFieldErrorLabel.isHidden = false
 
-        stackView.addArrangedSubview(confirmPasswordTextField)
-        stackView.addArrangedSubview(confirmPasswordTextFieldErrorLabel)
-
-        return stackView
+        return createFieldStackView(for: [
+            confirmPasswordTextField, confirmPasswordTextFieldErrorLabel,
+        ])
     }
 
     private func createSignUpButton() -> UIButton {
@@ -292,11 +272,11 @@ extension SignUpViewController {
 
 extension SignUpViewController {
 
-    private func createStackView(spacing: CGFloat, items: [UIView] = []) -> UIStackView {
-        let stackView = UIStackView(arrangedSubviews: items)
+    private func createFieldStackView(for arrangedSubviews: [UIView]) -> UIStackView {
+        let stackView = UIStackView(arrangedSubviews: arrangedSubviews)
         stackView.axis = .vertical
         stackView.alignment = .fill
-        stackView.spacing = spacing
+        stackView.spacing = 8
 
         return stackView
     }
