@@ -19,10 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         window = UIWindow(windowScene: windowScene)
+        window?.rootViewController = SignUpViewController()
         window?.makeKeyAndVisible()
-        window?.rootViewController = UINavigationController(
-            rootViewController: SignUpViewController()
-        )
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {

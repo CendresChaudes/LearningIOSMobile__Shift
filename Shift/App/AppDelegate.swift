@@ -11,7 +11,7 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?
+    // MARK: - Core Data
 
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Shift")
@@ -24,23 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         return container
     }()
-
-    // MARK: - UISceneSession Lifecycle
-
-    func application(
-        _ application: UIApplication,
-        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
-    ) -> Bool {
-
-        let rootViewController = SignUpViewController()
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = rootViewController
-        window?.makeKeyAndVisible()
-
-        return true
-    }
-
-    // MARK: - Core Data
 
     func saveContext() {
         let context = persistentContainer.viewContext
