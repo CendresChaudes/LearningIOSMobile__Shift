@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomErrorLabel: UILabel {
+final class CustomErrorLabel: UILabel {
 
     init(text: String? = "") {
         super.init(frame: .zero)

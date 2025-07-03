@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomScreenContainerView: UIView {
+final class CustomScreenContainerView: UIView {
 
     private let verticalSpacing: CGFloat = 20
     private let horizontalSpacing: CGFloat = 16
