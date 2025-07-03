@@ -105,10 +105,12 @@ extension SignUpViewController {
     }
 
     private func createNameTextFieldStackView() -> UIStackView {
-        nameTextField = createTextField(
+        nameTextField = CustomTextField(
             placeholder: "Имя",
-            textContentType: .name
         )
+
+        nameTextField.textContentType = .name
+        nameTextField.returnKeyType = .next
 
         nameTextFieldErrorLabel = CustomErrorLabel()
         nameTextFieldErrorLabel.isHidden = false
@@ -117,10 +119,12 @@ extension SignUpViewController {
     }
 
     private func createSurnameTextFieldStackView() -> UIStackView {
-        surnameTextField = createTextField(
+        surnameTextField = CustomTextField(
             placeholder: "Фамилия",
-            textContentType: .familyName
         )
+
+        surnameTextField.textContentType = .familyName
+        surnameTextField.returnKeyType = .next
 
         surnameTextFieldErrorLabel = CustomErrorLabel()
         surnameTextFieldErrorLabel.isHidden = false
@@ -129,10 +133,12 @@ extension SignUpViewController {
     }
 
     private func createDateOfBirthTextFieldStackView() -> UIStackView {
-        dateOfBirthTextField = createTextField(
+        dateOfBirthTextField = CustomTextField(
             placeholder: "Дата рождения",
-            textContentType: nil
         )
+
+        dateOfBirthTextField.textContentType = nil
+        dateOfBirthTextField.returnKeyType = .next
 
         dateOfBirthTextField.setDatePickerAsInputViewFor(
             target: self,
@@ -146,13 +152,13 @@ extension SignUpViewController {
     }
 
     private func createPasswordTextFieldStackView() -> UIStackView {
-        passwordTextField = createTextField(
-            placeholder: "Пароль",
-            textContentType: .password,
-            autoCapitalization: .none,
-            autocorrectionType: .no,
-            isSecure: true
+        passwordTextField = CustomTextField(
+            placeholder: "Пароль"
         )
+
+        passwordTextField.textContentType = .password
+        passwordTextField.returnKeyType = .next
+        passwordTextField.isSecureTextEntry = true
 
         passwordTextFieldErrorLabel = CustomErrorLabel()
         passwordTextFieldErrorLabel.isHidden = false
@@ -161,14 +167,13 @@ extension SignUpViewController {
     }
 
     private func createConfirmPasswordTextFieldStackView() -> UIStackView {
-        confirmPasswordTextField = createTextField(
+        confirmPasswordTextField = CustomTextField(
             placeholder: "Подтвердите пароль",
-            textContentType: .password,
-            autoCapitalization: .none,
-            autocorrectionType: .no,
-            returnKeyType: .done,
-            isSecure: true
         )
+
+        passwordTextField.textContentType = .password
+        confirmPasswordTextField.returnKeyType = .done
+        confirmPasswordTextField.isSecureTextEntry = true
 
         confirmPasswordTextFieldErrorLabel = CustomErrorLabel()
         confirmPasswordTextFieldErrorLabel.isHidden = false
@@ -279,46 +284,6 @@ extension SignUpViewController {
         stackView.spacing = 8
 
         return stackView
-    }
-
-    private func createTextField(
-        placeholder: String,
-        textContentType: UITextContentType?,
-        autoCapitalization: UITextAutocapitalizationType = .words,
-        autocorrectionType: UITextAutocorrectionType = .yes,
-        keyboardType: UIKeyboardType = .default,
-        returnKeyType: UIReturnKeyType = .next,
-        isSecure: Bool = false
-    ) -> UITextField {
-        let textField = UITextField()
-
-        textField.borderStyle = .roundedRect
-        textField.layer.borderColor = UIColor.red.cgColor
-        textField.backgroundColor = .white
-
-        textField.font = UIFont.systemFont(ofSize: 18)
-        textField.autocapitalizationType = autoCapitalization
-        textField.autocorrectionType = autocorrectionType
-        textField.textContentType = isSecure ? .none : textContentType
-        textField.textColor = .black
-
-        textField.attributedPlaceholder = NSAttributedString(
-            string: placeholder,
-            attributes: [
-                NSAttributedString.Key.foregroundColor: UIColor.lightGray
-            ]
-        )
-
-        textField.clearButtonMode = .always
-        textField.keyboardType = keyboardType
-        textField.returnKeyType = returnKeyType
-        textField.isSecureTextEntry = isSecure
-
-        textField.snp.makeConstraints { make in
-            make.height.equalTo(40)
-        }
-
-        return textField
     }
 
     @objc
