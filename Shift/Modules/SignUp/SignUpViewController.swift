@@ -216,29 +216,29 @@ extension SignUpViewController {
         }
 
         nameTextFieldErrorLabel.text = validator.validateNameTextField(name: nameValue)
-        nameTextFieldErrorLabel.isHidden = false
+        nameTextFieldErrorLabel.isHidden = nameTextFieldErrorLabel.text == nil
 
         surnameTextFieldErrorLabel.text = validator.validateSurnameTextField(surname: surnameValue)
-        surnameTextFieldErrorLabel.isHidden = false
+        surnameTextFieldErrorLabel.isHidden = surnameTextFieldErrorLabel.text == nil
 
         dateOfBirthTextFieldErrorLabel.text = validator.validateDateOfBirthTextField(
             dateOfBirth: dateOfBirthValue
         )
 
-        dateOfBirthTextFieldErrorLabel.isHidden = false
+        dateOfBirthTextFieldErrorLabel.isHidden = dateOfBirthTextFieldErrorLabel.text == nil
 
         passwordTextFieldErrorLabel.text = validator.validatePasswordValidTextField(
             password: passwordValue
         )
 
-        passwordTextFieldErrorLabel.isHidden = false
+        passwordTextFieldErrorLabel.isHidden = passwordTextFieldErrorLabel.text == nil
 
         confirmPasswordTextFieldErrorLabel.text = validator.validateConfirmPasswordValid(
             password: passwordValue,
             confirmPassword: confirmPasswordValue
         )
 
-        confirmPasswordTextFieldErrorLabel.isHidden = false
+        confirmPasswordTextFieldErrorLabel.isHidden = confirmPasswordTextFieldErrorLabel.text == nil
     }
 
     private func setupTextFieldDelegates() {
