@@ -263,8 +263,8 @@ extension SignUpViewController {
 
     private func validateConfirmPasswordTextField() {
         guard
-            let passwordValue = surnameTextField.text, !passwordValue.isEmpty,
-            let confirmPasswordValue = passwordTextField.text, !confirmPasswordValue.isEmpty
+            let passwordValue = passwordTextField.text, !passwordValue.isEmpty,
+            let confirmPasswordValue = confirmPasswordTextField.text, !confirmPasswordValue.isEmpty
         else { return }
 
         confirmPasswordTextFieldErrorLabel.text = validator.validateConfirmPasswordTextField(
