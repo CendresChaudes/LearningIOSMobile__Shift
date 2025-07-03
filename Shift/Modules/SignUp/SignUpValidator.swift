@@ -9,47 +9,124 @@ import Foundation
 
 final class SignUpValidator {
 
-    static func isNameValid(name: String) -> Bool {
-        let nameRegex = "^\\w{2,20}$"
-        let trimmedString = name.trimmingCharacters(in: .whitespaces)
-        let validateName = NSPredicate(format: "SELF MATCHES %@", nameRegex)
-        let isValid = validateName.evaluate(with: trimmedString)
+    private static let onlyLettersAndSpacesRegex = "^[A-Za-zА-Яа-яЁё\\s]+$"
 
-        return isValid
+    private static let passwordRegex =
+        "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-z\\d$@$!%*?&#]+$"
+
+    static func validateNameTextField(name: String) -> String? {
+        let trimmedValue = trimWhitespaces(from: name)
+
+        let regex = onlyLettersAndSpacesRegex
+        let predicate = createPredicate(for: regex)
+        let isValidByRegex = predicate.evaluate(with: trimmedValue)
+
+        let minLength = 2
+        let maxLength = 20
+
+        var errorMessage: String?
+
+        if trimmedValue.count < minLength {
+            errorMessage = "Имя должно содержать не менее \(minLength) символов"
+        } else if trimmedValue.count > maxLength {
+            errorMessage = "Имя должно содержать не более \(maxLength) символов"
+        } else if !isValidByRegex {
+            errorMessage = "Имя должно содержать только буквы и пробелы"
+        } else {
+            errorMessage = nil
+        }
+
+        return errorMessage
     }
 
-    static func isSurnameValid(name: String) -> Bool {
-        let nameRegex = "^\\w{2,30}$"
-        let trimmedString = name.trimmingCharacters(in: .whitespaces)
-        let validateName = NSPredicate(format: "SELF MATCHES %@", nameRegex)
-        let isValid = validateName.evaluate(with: trimmedString)
+    static func validateSurnameTextField(surname: String) -> String? {
+        let trimmedValue = trimWhitespaces(from: surname)
 
-        return isValid
+        let regex = onlyLettersAndSpacesRegex
+        let predicate = createPredicate(for: regex)
+        let isValidByRegex = predicate.evaluate(with: trimmedValue)
+
+        let minLength = 2
+        let maxLength = 30
+
+        var errorMessage: String?
+
+        if trimmedValue.count < minLength {
+            errorMessage = "Фамилия должна содержать не менее \(minLength) символов"
+        } else if trimmedValue.count > maxLength {
+            errorMessage = "Фамилия должна содержать не более \(maxLength) символов"
+        } else if !isValidByRegex {
+            errorMessage = "Фамилия должна содержать только буквы и пробелы"
+        } else {
+            errorMessage = nil
+        }
+
+        return errorMessage
     }
 
-    static func isDateOfBirthValid(dateOfBirth: String) -> Bool {
-        print(dateOfBirth)
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.locale = Locale(identifier: "ru_RU")
-//        dateFormatter.dateStyle = .medium
-//
-//        if let date = dateFormatter.date(from: dateOfBirth) {
-//            return date <= Date()
-//        }
+    static func validateDateOfBirthTextField(dateOfBirth: String) -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ru_RU")
+        dateFormatter.dateStyle = .medium
 
-        return false
+        guard let date = dateFormatter.date(from: dateOfBirth) else {
+            return "Некорректный формат даты. Выберите дату из календаря"
+        }
+
+        let actualAge = Calendar.current.dateComponents([.year], from: date, to: Date()).year ?? 0
+
+        let minAge = 18
+        let maxAge = 130
+
+        var errorMessage: String?
+
+        switch actualAge {
+        case ..<minAge:
+            errorMessage = "Вам должно быть не меньше \(minAge) лет"
+        case (maxAge + 1)...:
+            errorMessage = "Вы не можете быть старше \(maxAge) лет"
+        default:
+            errorMessage = nil
+        }
+
+        return errorMessage
     }
 
-    static func isPasswordValid(password: String) -> Bool {
-        let passRegEx = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$"
-        let trimmedString = password.trimmingCharacters(in: .whitespaces)
-        let validatePassord = NSPredicate(format: "SELF MATCHES %@", passRegEx)
-        let isValid = validatePassord.evaluate(with: trimmedString)
+    static func validatePasswordValidTextField(password: String) -> String? {
+        let trimmedValue = trimWhitespaces(from: password)
 
-        return isValid
+        let regex = passwordRegex
+        let predicate = createPredicate(for: regex)
+        let isValidByRegex = predicate.evaluate(with: trimmedValue)
+
+        let minLength = 8
+        let maxLength = 30
+
+        var errorMessage: String?
+
+        if trimmedValue.count < minLength {
+            errorMessage = "Пароль должен содержать не менее \(minLength) символов"
+        } else if trimmedValue.count > maxLength {
+            errorMessage = "Пароль должен содержать не более \(maxLength) символов"
+        } else if !isValidByRegex {
+            errorMessage =
+                "Пароль должен содержать хотя бы одну заглавную букву, одну строчную букву, одну цифру и один специальный символ"
+        } else {
+            errorMessage = nil
+        }
+
+        return errorMessage
     }
 
-    static func isAcceptPasswordValid(password: String, confirmPassword: String) -> Bool {
-        password == confirmPassword
+    static func validateConfirmPasswordValid(password: String, confirmPassword: String) -> String? {
+        password == confirmPassword ? nil : "Пароли не совпадают"
+    }
+
+    private static func trimWhitespaces(from string: String) -> String {
+        string.trimmingCharacters(in: .whitespaces)
+    }
+
+    private static func createPredicate(for regex: String) -> NSPredicate {
+        NSPredicate(format: "SELF MATCHES %@", regex)
     }
 }

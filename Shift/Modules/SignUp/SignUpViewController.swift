@@ -10,11 +10,28 @@ import UIKit
 
 final class SignUpViewController: UIViewController {
 
-    private var dateOfBirthTextField: UITextField?
+    private var nameTextField: UITextField!
+    private var surnameTextField: UITextField!
+    private var dateOfBirthTextField: UITextField!
+    private var passwordTextField: UITextField!
+    private var confirmPasswordTextField: UITextField!
+
+    private var signUpButton: UIButton!
+
+    private var nameTextFieldErrorLabel: UILabel!
+    private var surnameTextFieldErrorLabel: UILabel!
+    private var dateOfBirthTextFieldErrorLabel: UILabel!
+    private var passwordTextFieldErrorLabel: UILabel!
+    private var confirmPasswordTextFieldErrorLabel: UILabel!
+
+    private let validator = SignUpValidator.self
+
+    // MARK: - View lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupTextFieldDelegates()
     }
 
     // MARK: - Setup UI
@@ -38,99 +55,151 @@ final class SignUpViewController: UIViewController {
             make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
         }
 
+        signUpButton = createSignUpButton()
+        container.addSubview(signUpButton)
+
+        signUpButton.snp.makeConstraints { make in
+            make.bottom.equalTo(container.layoutMarginsGuide.snp.bottom)
+            make.leading.equalTo(container.layoutMarginsGuide.snp.leading)
+            make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
+        }
+
         let scrollView = UIScrollView()
         container.addSubview(scrollView)
 
         scrollView.snp.makeConstraints { make in
             make.top.equalTo(screenTitleLabel.snp.bottom).offset(40)
-            make.bottom.equalTo(container.layoutMarginsGuide.snp.bottom)
+            make.bottom.equalTo(signUpButton.snp.top).offset(-40)
             make.leading.equalTo(container.layoutMarginsGuide.snp.leading)
             make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
         }
 
-        let stackView = createStackView()
-        scrollView.addSubview(stackView)
+        let fieldsStackView = createFieldStackView()
+        scrollView.addSubview(fieldsStackView)
 
-        stackView.snp.makeConstraints { make in
+        fieldsStackView.snp.makeConstraints { make in
             make.edges.equalTo(scrollView)
             make.width.equalTo(scrollView)
-        }
-
-        let nameTextField = createNameTextField()
-        stackView.addArrangedSubview(nameTextField)
-
-        let surnameTextField = createSurnameTextField()
-        stackView.addArrangedSubview(surnameTextField)
-
-        dateOfBirthTextField = createDateOfBirthTextField()
-
-        if let dateOfBirthTextField {
-            dateOfBirthTextField.setDatePickerAsInputViewFor(
-                target: self,
-                selector: #selector(dateSelected)
-            )
-
-            stackView.addArrangedSubview(dateOfBirthTextField)
-        }
-
-        let passwordTextField = createPasswordTextField()
-        stackView.addArrangedSubview(passwordTextField)
-
-        let acceptPasswordTextField = createAcceptPasswordTextField()
-        stackView.addArrangedSubview(acceptPasswordTextField)
-
-        let (buttonHeight, signUpButton) = createSignUpButton()
-        container.addSubview(signUpButton)
-
-        signUpButton.snp.makeConstraints { make in
-            make.height.equalTo(buttonHeight)
-            make.bottom.equalTo(container.layoutMarginsGuide.snp.bottom)
-            make.leading.equalTo(container.layoutMarginsGuide.snp.leading)
-            make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
         }
     }
 }
 
 // MARK: - UI components implementation
+
 extension SignUpViewController {
 
-    private func createScreenTitleLabel() -> UILabel {
-        createTitleLabel(text: "Регистрация")
+    private func createFieldStackView() -> UIStackView {
+        return createStackView(
+            spacing: 28,
+            items: [
+                createNameTextFieldStackView(),
+                createSurnameTextFieldStackView(),
+                createDateOfBirthTextFieldStackView(),
+                createPasswordTextFieldStackView(),
+                createConfirmPasswordTextFieldStackView(),
+            ]
+        )
     }
 
-    private func createNameTextField() -> UITextField {
-        createTextField(
+    private func createScreenTitleLabel() -> UILabel {
+        let label = UILabel()
+        label.text = "Регистрация"
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 32, weight: .bold)
+        
+        return label
+    }
+
+    private func createErrorLabel(text: String) -> UILabel {
+        let label = UILabel()
+        label.text = text
+        label.font = .systemFont(ofSize: 16, weight: .regular)
+        label.textColor = .red
+        label.numberOfLines = 0
+
+        return label
+    }
+
+    private func createNameTextFieldStackView() -> UIStackView {
+        let stackView = createStackView(spacing: 8)
+
+        nameTextField = createTextField(
             placeholder: "Имя",
             textContentType: .name
         )
+
+        nameTextFieldErrorLabel = createErrorLabel(text: "")
+        nameTextFieldErrorLabel.isHidden = false
+
+        stackView.addArrangedSubview(nameTextField)
+        stackView.addArrangedSubview(nameTextFieldErrorLabel)
+
+        return stackView
     }
 
-    private func createSurnameTextField() -> UITextField {
-        createTextField(
+    private func createSurnameTextFieldStackView() -> UIStackView {
+        let stackView = createStackView(spacing: 8)
+
+        surnameTextField = createTextField(
             placeholder: "Фамилия",
             textContentType: .familyName
         )
+
+        surnameTextFieldErrorLabel = createErrorLabel(text: "")
+        surnameTextFieldErrorLabel.isHidden = false
+
+        stackView.addArrangedSubview(surnameTextField)
+        stackView.addArrangedSubview(surnameTextFieldErrorLabel)
+
+        return stackView
     }
 
-    private func createDateOfBirthTextField() -> UITextField {
-        createTextField(
+    private func createDateOfBirthTextFieldStackView() -> UIStackView {
+        let stackView = createStackView(spacing: 8)
+
+        dateOfBirthTextField = createTextField(
             placeholder: "Дата рождения",
             textContentType: nil
         )
+
+        dateOfBirthTextField.setDatePickerAsInputViewFor(
+            target: self,
+            selector: #selector(dateSelected)
+        )
+
+        dateOfBirthTextFieldErrorLabel = createErrorLabel(text: "")
+        dateOfBirthTextFieldErrorLabel.isHidden = false
+
+        stackView.addArrangedSubview(dateOfBirthTextField)
+        stackView.addArrangedSubview(dateOfBirthTextFieldErrorLabel)
+
+        return stackView
     }
 
-    private func createPasswordTextField() -> UITextField {
-        createTextField(
+    private func createPasswordTextFieldStackView() -> UIStackView {
+        let stackView = createStackView(spacing: 8)
+
+        passwordTextField = createTextField(
             placeholder: "Пароль",
             textContentType: .password,
             autoCapitalization: .none,
             autocorrectionType: .no,
             isSecure: true
         )
+
+        passwordTextFieldErrorLabel = createErrorLabel(text: "")
+        passwordTextFieldErrorLabel.isHidden = false
+
+        stackView.addArrangedSubview(passwordTextField)
+        stackView.addArrangedSubview(passwordTextFieldErrorLabel)
+
+        return stackView
     }
 
-    private func createAcceptPasswordTextField() -> UITextField {
-        createTextField(
+    private func createConfirmPasswordTextFieldStackView() -> UIStackView {
+        let stackView = createStackView(spacing: 8)
+
+        confirmPasswordTextField = createTextField(
             placeholder: "Подтвердите пароль",
             textContentType: .password,
             autoCapitalization: .none,
@@ -138,18 +207,109 @@ extension SignUpViewController {
             returnKeyType: .done,
             isSecure: true
         )
+
+        confirmPasswordTextFieldErrorLabel = createErrorLabel(text: "")
+        confirmPasswordTextFieldErrorLabel.isHidden = false
+
+        stackView.addArrangedSubview(confirmPasswordTextField)
+        stackView.addArrangedSubview(confirmPasswordTextFieldErrorLabel)
+
+        return stackView
     }
 
-    private func createSignUpButton() -> (buttonHeight: CGFloat, button: UIButton) {
-        let buttonHeight: CGFloat = 40
+    private func createSignUpButton() -> UIButton {
+        let buttonHeight: CGFloat = 44
 
-        return (
-            buttonHeight: buttonHeight,
-            button: createButton(
-                title: "Зарегистрироваться",
-                cornerRadius: buttonHeight / 2
-            )
+        let button = CustomButton(
+            title: "Зарегистрироваться",
+            cornerRadius: buttonHeight / 2,
+            isEnabled: false
         )
+
+        button.snp.makeConstraints { make in
+            make.height.equalTo(buttonHeight)
+        }
+
+        button.addTarget(
+            self,
+            action: #selector(handleSignUpButtonTouchedUpInside),
+            for: .touchUpInside
+        )
+
+        return button
+    }
+
+    @objc
+    private func handleSignUpButtonTouchedUpInside() {
+        validateFields()
+    }
+}
+
+// MARK: - Validation
+
+extension SignUpViewController {
+
+    private func validateFields() {
+        guard
+            let nameValue = nameTextField.text, !nameValue.isEmpty,
+            let surnameValue = surnameTextField.text, !surnameValue.isEmpty,
+            let dateOfBirthValue = dateOfBirthTextField.text, !dateOfBirthValue.isEmpty,
+            let passwordValue = passwordTextField.text, !passwordValue.isEmpty,
+            let confirmPasswordValue = confirmPasswordTextField.text, !confirmPasswordValue.isEmpty
+        else {
+            return
+        }
+
+        nameTextFieldErrorLabel.text = validator.validateNameTextField(name: nameValue)
+        nameTextFieldErrorLabel.isHidden = false
+
+        surnameTextFieldErrorLabel.text = validator.validateSurnameTextField(surname: surnameValue)
+        surnameTextFieldErrorLabel.isHidden = false
+
+        dateOfBirthTextFieldErrorLabel.text = validator.validateDateOfBirthTextField(
+            dateOfBirth: dateOfBirthValue
+        )
+
+        dateOfBirthTextFieldErrorLabel.isHidden = false
+
+        passwordTextFieldErrorLabel.text = validator.validatePasswordValidTextField(
+            password: passwordValue
+        )
+
+        passwordTextFieldErrorLabel.isHidden = false
+
+        confirmPasswordTextFieldErrorLabel.text = validator.validateConfirmPasswordValid(
+            password: passwordValue,
+            confirmPassword: confirmPasswordValue
+        )
+
+        confirmPasswordTextFieldErrorLabel.isHidden = false
+    }
+
+    private func setupTextFieldDelegates() {
+        [
+            nameTextField,
+            surnameTextField,
+            dateOfBirthTextField,
+            passwordTextField,
+            confirmPasswordTextField,
+        ].forEach {
+            $0.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        }
+    }
+
+    @objc
+    private func textFieldDidChange() {
+        if let nameValue = nameTextField.text, !nameValue.isEmpty,
+            let surnameValue = surnameTextField.text, !surnameValue.isEmpty,
+            let dateOfBirthValue = dateOfBirthTextField.text, !dateOfBirthValue.isEmpty,
+            let passwordValue = passwordTextField.text, !passwordValue.isEmpty,
+            let confirmPasswordValue = confirmPasswordTextField.text, !confirmPasswordValue.isEmpty
+        {
+            signUpButton.isEnabled = true
+        } else {
+            signUpButton.isEnabled = false
+        }
     }
 }
 
@@ -172,23 +332,13 @@ extension SignUpViewController {
         return container
     }
 
-    private func createStackView() -> UIStackView {
-        let stackView = UIStackView(arrangedSubviews: [])
+    private func createStackView(spacing: CGFloat, items: [UIView] = []) -> UIStackView {
+        let stackView = UIStackView(arrangedSubviews: items)
         stackView.axis = .vertical
         stackView.alignment = .fill
-        stackView.spacing = 20
+        stackView.spacing = spacing
 
         return stackView
-    }
-
-    private func createTitleLabel(text: String) -> UILabel {
-        let label = UILabel()
-        label.text = text
-        label.font = .systemFont(ofSize: 32, weight: .bold)
-        label.textColor = .black
-        label.textAlignment = .center
-
-        return label
     }
 
     private func createTextField(
@@ -206,7 +356,7 @@ extension SignUpViewController {
         textField.layer.borderColor = UIColor.red.cgColor
         textField.backgroundColor = .white
 
-        textField.font = UIFont.systemFont(ofSize: 16)
+        textField.font = UIFont.systemFont(ofSize: 18)
         textField.autocapitalizationType = autoCapitalization
         textField.autocorrectionType = autocorrectionType
         textField.textContentType = isSecure ? .none : textContentType
@@ -224,30 +374,17 @@ extension SignUpViewController {
         textField.returnKeyType = returnKeyType
         textField.isSecureTextEntry = isSecure
 
+        textField.snp.makeConstraints { make in
+            make.height.equalTo(40)
+        }
+
         return textField
-    }
-
-    private func createButton(
-        title: String,
-        cornerRadius: CGFloat = 0,
-        isEnabled: Bool = true
-    ) -> UIButton {
-        let button = UIButton(type: .system)
-        button.layer.cornerRadius = cornerRadius
-        button.setTitle(title, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
-        button.isEnabled = isEnabled
-        button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(.lightGray, for: .disabled)
-        button.backgroundColor = isEnabled ? .systemBlue : .gray
-
-        return button
     }
 
     @objc
     func dateSelected() {
         guard
-            let field = self.dateOfBirthTextField,
+            let field = dateOfBirthTextField,
             let datePicker = field.inputView as? UIDatePicker
         else { return }
 
