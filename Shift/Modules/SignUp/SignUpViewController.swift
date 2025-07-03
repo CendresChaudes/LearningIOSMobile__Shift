@@ -218,17 +218,11 @@ extension SignUpViewController {
     }
 
     private func createSignUpButton() -> UIButton {
-        let buttonHeight: CGFloat = 44
-
         let button = CustomButton(
-            title: "Зарегистрироваться",
-            cornerRadius: buttonHeight / 2,
-            isEnabled: false
+            title: "Зарегистрироваться"
         )
 
-        button.snp.makeConstraints { make in
-            make.height.equalTo(buttonHeight)
-        }
+        button.isEnabled = false
 
         button.addTarget(
             self,

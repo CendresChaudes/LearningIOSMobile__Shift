@@ -5,6 +5,7 @@
 //  Created by Роман on 02.07.2025.
 //
 
+import SnapKit
 import UIKit
 
 final class CustomButton: UIButton {
@@ -14,15 +15,20 @@ final class CustomButton: UIButton {
         }
     }
 
-    init(title: String, cornerRadius: CGFloat = 0, isEnabled: Bool = true) {
+    private let buttonHeight: CGFloat = 44
+
+    init(title: String) {
         super.init(frame: .zero)
 
-        self.layer.cornerRadius = cornerRadius
+        self.layer.cornerRadius = buttonHeight / 2
         self.setTitle(title, for: .normal)
         self.titleLabel?.font = .systemFont(ofSize: 22, weight: .bold)
         self.setTitleColor(.white, for: .normal)
         self.setTitleColor(.lightGray, for: .disabled)
-        self.isEnabled = isEnabled
+
+        self.snp.makeConstraints { make in
+            make.height.equalTo(buttonHeight)
+        }
     }
 
     @available(
