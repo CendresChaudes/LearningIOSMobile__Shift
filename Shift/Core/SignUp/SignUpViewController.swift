@@ -385,8 +385,7 @@ extension SignUpViewController {
             let surnameValue = surnameTextField.text, !surnameValue.isEmpty,
             let dateOfBirthValue = dateOfBirthTextField.text, !dateOfBirthValue.isEmpty,
             let passwordValue = passwordTextField.text, !passwordValue.isEmpty,
-            let confirmPasswordValue = confirmPasswordTextField.text, !confirmPasswordValue.isEmpty
-        {
+            let confirmPasswordValue = confirmPasswordTextField.text, !confirmPasswordValue.isEmpty {
             signUpButton.isEnabled = true
         } else {
             signUpButton.isEnabled = false

@@ -115,8 +115,7 @@ final class SignUpValidator {
     }
 
     static func validateConfirmPasswordTextField(password: String, confirmPassword: String)
-        -> String?
-    {
+        -> String? {
         password == confirmPassword ? nil : "Пароли не совпадают"
     }
 

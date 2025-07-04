@@ -13,8 +13,7 @@ final class CustomTextField: UITextField {
     override var textContentType: UITextContentType! {
         didSet {
             if textContentType == UITextContentType.password
-                || textContentType == UITextContentType.newPassword
-            {
+                || textContentType == UITextContentType.newPassword {
                 self.autocapitalizationType = .none
                 self.autocorrectionType = .no
             }
