@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 @MainActor
 final class UserStorageManager {
@@ -28,17 +29,17 @@ final class UserStorageManager {
     func get() throws -> User {
         do {
             let fetchRequest = User.fetchRequest()
-            let user = try dataManager.fetch(fetchRequest).last
+            let users: [User]? = try dataManager.fetch(fetchRequest)
 
-            guard let user else {
+            guard let user = users?.last else {
                 throw NSError(
                     domain: "UserStorageManager",
                     code: 1,
-                    userInfo: [NSLocalizedDescriptionKey: "Response must be exist"]
+                    userInfo: [NSLocalizedDescriptionKey: "Response must exist"]
                 )
             }
 
-            return user as! User
+            return user
         } catch {
             throw error
         }

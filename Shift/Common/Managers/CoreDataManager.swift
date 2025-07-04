@@ -32,7 +32,7 @@ final class CoreDataManager: NSObject {
 
 extension CoreDataManager: DataManagerProtocol {
 
-    func insert(_ object: Any) throws {
+    func insert<T>(_ object: T) throws {
         guard let managedObject = object as? NSManagedObject else {
             throw NSError(
                 domain: "CoreDataManagerError",
@@ -47,8 +47,8 @@ extension CoreDataManager: DataManagerProtocol {
         }
     }
 
-    func fetch(_ request: Any) throws -> [Any] {
-        guard let fetchRequest = request as? NSFetchRequest<NSFetchRequestResult> else {
+    func fetch<T>(_ request: Any) throws -> [T]? {
+        guard let request = request as? NSFetchRequest<NSFetchRequestResult> else {
             throw NSError(
                 domain: "CoreDataManagerError",
                 code: 1,
@@ -56,6 +56,6 @@ extension CoreDataManager: DataManagerProtocol {
             )
         }
 
-        return try context.fetch(fetchRequest)
+        return try context.fetch(request) as? [T]
     }
 }
