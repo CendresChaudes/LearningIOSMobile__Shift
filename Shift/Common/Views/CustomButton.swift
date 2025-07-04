@@ -25,6 +25,7 @@ final class CustomButton: UIButton {
         self.titleLabel?.font = .systemFont(ofSize: 22, weight: .bold)
         self.setTitleColor(.white, for: .normal)
         self.setTitleColor(.lightGray, for: .disabled)
+        self.isEnabled = true
 
         self.snp.makeConstraints { make in
             make.height.equalTo(buttonHeight)
