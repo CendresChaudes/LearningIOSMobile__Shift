@@ -113,9 +113,9 @@ extension SignUpViewController {
             make.width.equalTo(scrollView)
         }
     }
-    
+
     // MARK: - UI components impls
-    
+
     private func createFieldsStackView() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [
             createNameTextFieldStackView(),
@@ -292,9 +292,9 @@ extension SignUpViewController {
         alertController.addAction(okAction)
         present(alertController, animated: true)
     }
-    
+
     // MARK: - UI components bases
-    
+
     private func createFieldStackView(for arrangedSubviews: [UIView]) -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: arrangedSubviews)
         stackView.axis = .vertical
