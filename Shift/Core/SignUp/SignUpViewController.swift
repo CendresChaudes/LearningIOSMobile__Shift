@@ -10,6 +10,8 @@ import UIKit
 
 final class SignUpViewController: UIViewController {
 
+    private var viewModel: SignUpViewModel!
+
     private var nameTextField: UITextField!
     private var surnameTextField: UITextField!
     private var dateOfBirthTextField: UITextField!
@@ -37,15 +39,23 @@ final class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupViewModel()
+
         setupUI()
         setupTextFieldDelegates()
         setupViewTapGesture()
 
         setupDebug()
     }
-    
+
+    // MARK: - Setup view model
+
+    private func setupViewModel() {
+        viewModel = SignUpViewModel()
+    }
+
     // MARK: - Setup debug
-    
+
     private func setupDebug() {
         #if DEBUG
             setupFieldsValuesForDebug()
@@ -173,6 +183,22 @@ extension SignUpViewController {
         return createFieldStackView(for: [dateOfBirthTextField, dateOfBirthTextFieldErrorLabel])
     }
 
+    @objc
+    private func dateSelected() {
+        guard
+            let field = dateOfBirthTextField,
+            let datePicker = field.inputView as? UIDatePicker
+        else { return }
+
+        print(datePicker.date)
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ru_RU")
+        dateFormatter.dateStyle = .medium
+        field.text = dateFormatter.string(from: datePicker.date)
+        field.resignFirstResponder()
+    }
+
     private func createPasswordTextFieldStackView() -> UIStackView {
         passwordTextField = CustomTextField(
             placeholder: "Пароль"
@@ -228,14 +254,46 @@ extension SignUpViewController {
         validateFields()
 
         if isFieldsValid {
-            openMainScreen()
+            guard let name = nameTextField.text,
+                let surname = surnameTextField.text,
+                let dateOfBirth = dateOfBirthTextField.text,
+                let password = passwordTextField.text
+            else { return }
+
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "ru_RU")
+            dateFormatter.dateStyle = .medium
+
+            guard let dateOfBirthIso = dateFormatter.date(from: dateOfBirth) else { return }
+
+            do {
+                try viewModel.saveUser(
+                    name: name,
+                    surname: surname,
+                    dateOfBirth: dateOfBirthIso,
+                    password: password
+                )
+
+                openMainScreen()
+            } catch {
+                showAlert(
+                    title: "Ошибка",
+                    message: "Не удалось сохранить данные. Попробуйте еще раз"
+                )
+            }
         }
     }
 
-    private func openMainScreen() {
-        let mainVC = MainViewController()
-        mainVC.modalPresentationStyle = .fullScreen
-        present(mainVC, animated: true)
+    private func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+
+        let okAction = UIAlertAction(title: "Закрыть", style: .default)
+        alertController.addAction(okAction)
+        present(alertController, animated: true)
     }
 }
 
@@ -340,20 +398,6 @@ extension SignUpViewController {
 
         return stackView
     }
-
-    @objc
-    private func dateSelected() {
-        guard
-            let field = dateOfBirthTextField,
-            let datePicker = field.inputView as? UIDatePicker
-        else { return }
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "ru_RU")
-        dateFormatter.dateStyle = .medium
-        field.text = dateFormatter.string(from: datePicker.date)
-        field.resignFirstResponder()
-    }
 }
 
 // MARK: - Gestures
@@ -371,6 +415,19 @@ extension SignUpViewController {
         view.endEditing(true)
     }
 }
+
+// MARK: - Navigation
+
+extension SignUpViewController {
+
+    private func openMainScreen() {
+        let mainVC = MainViewController()
+        mainVC.modalPresentationStyle = .fullScreen
+        present(mainVC, animated: true)
+    }
+}
+
+// MARK: - UITextFieldDelegate
 
 extension SignUpViewController: UITextFieldDelegate {
 

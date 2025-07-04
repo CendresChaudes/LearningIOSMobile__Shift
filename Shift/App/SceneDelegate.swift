@@ -24,6 +24,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
-        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+        do {
+            try (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+        } catch {
+            let nserror = error as NSError
+            print("[NS] - Error: \(nserror), \(nserror.userInfo)")
+        }
     }
 }

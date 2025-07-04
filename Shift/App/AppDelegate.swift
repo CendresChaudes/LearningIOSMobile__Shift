@@ -18,25 +18,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         container.loadPersistentStores { description, error in
             if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+                print("Unresolved error \(error), \(error.userInfo)")
             } else {
+                #if DEBUG
                 print("[Core Data] - Database url: \(description.url?.absoluteString)")
+                #endif
             }
         }
 
         return container
     }()
 
-    func saveContext() {
+    func saveContext() throws {
         let context = persistentContainer.viewContext
 
         if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
+            try context.save()
         }
     }
 }
