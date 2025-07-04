@@ -10,12 +10,22 @@ import UIKit
 
 final class MainViewController: UIViewController {
 
+    private var viewModel: MainViewModel!
+
     // MARK: - View lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupViewModel()
+
         setupUI()
+    }
+
+    // MARK: - Setup view model
+
+    private func setupViewModel() {
+        viewModel = MainViewModel()
     }
 }
 
@@ -70,7 +80,27 @@ extension MainViewController {
 
     @objc
     private func handleGreetingButtonTouchedUpInside() {
-        openGreetingModal()
+        do {
+            let user = try viewModel.getUser()
+            openGreetingModal(for: user.name)
+        } catch {
+            showAlert(
+                title: "Ошибка",
+                message: "Не удалось загрузить данные. Попробуйте еще раз"
+            )
+        }
+    }
+
+    private func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+
+        let okAction = UIAlertAction(title: "Закрыть", style: .default)
+        alertController.addAction(okAction)
+        present(alertController, animated: true)
     }
 }
 
@@ -78,9 +108,10 @@ extension MainViewController {
 
 extension MainViewController {
 
-    private func openGreetingModal() {
+    private func openGreetingModal(for userName: String) {
         let greetingVC = GreetingViewController()
         greetingVC.modalPresentationStyle = .pageSheet
+        greetingVC.userName = userName
         present(greetingVC, animated: true)
     }
 }

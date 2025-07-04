@@ -52,7 +52,7 @@ extension CoreDataManager: DataManagerProtocol {
             throw NSError(
                 domain: "CoreDataManagerError",
                 code: 1,
-                userInfo: [NSLocalizedDescriptionKey: "Request must be an NSFetchRequest"]
+                userInfo: [NSLocalizedDescriptionKey: "Request must be NSFetchRequest"]
             )
         }
 
