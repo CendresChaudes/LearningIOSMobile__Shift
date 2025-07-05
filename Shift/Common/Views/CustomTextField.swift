@@ -13,7 +13,8 @@ final class CustomTextField: UITextField {
     override var textContentType: UITextContentType! {
         didSet {
             if textContentType == UITextContentType.password
-                || textContentType == UITextContentType.newPassword {
+                || textContentType == UITextContentType.newPassword
+            {
                 self.autocapitalizationType = .none
                 self.autocorrectionType = .no
             }
@@ -51,7 +52,7 @@ final class CustomTextField: UITextField {
         message:
             "This initializer is not available. Use init(placeholder:autocapitalizationType:) instead."
     )
-    required init?(coder: NSCoder) {
+    required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

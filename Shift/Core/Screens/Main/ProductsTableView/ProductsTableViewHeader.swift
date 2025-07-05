@@ -14,8 +14,8 @@ final class ProductsTableViewHeader: UIView {
     private var priceLabel: UILabel!
     private var ratingImage: UIImageView!
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init() {
+        super.init(frame: .zero)
 
         setupUI()
     }
@@ -23,9 +23,9 @@ final class ProductsTableViewHeader: UIView {
     @available(
         *,
         unavailable,
-        message: "This initializer is not available. Use init() instead."
+        message: "This initializer is not available. Use init(frame:) instead."
     )
-    required init?(coder: NSCoder) {
+    required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

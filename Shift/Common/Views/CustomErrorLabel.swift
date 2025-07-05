@@ -9,7 +9,7 @@ import UIKit
 
 final class CustomErrorLabel: UILabel {
 
-    init(text: String? = "") {
+    init(text: String = "") {
         super.init(frame: .zero)
 
         self.text = text
@@ -23,7 +23,7 @@ final class CustomErrorLabel: UILabel {
         unavailable,
         message: "This initializer is not available. Use init(text:) instead."
     )
-    required init?(coder: NSCoder) {
+    required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

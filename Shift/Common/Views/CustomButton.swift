@@ -36,10 +36,9 @@ final class CustomButton: UIButton {
     @available(
         *,
         unavailable,
-        message:
-            "This initializer is not available. Use init(title:cornerRadius:isEnabled:) instead."
+        message: "This initializer is not available. Use init(title:) instead."
     )
-    required init?(coder: NSCoder) {
+    required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 

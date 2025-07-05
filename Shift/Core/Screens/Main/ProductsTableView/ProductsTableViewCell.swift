@@ -25,7 +25,7 @@ final class ProductsTableViewCell: UITableViewCell {
         unavailable,
         message: "This initializer is not available. Use init(style:reuseIdentifier:) instead."
     )
-    required init?(coder: NSCoder) {
+    required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -86,7 +86,7 @@ extension ProductsTableViewCell {
 
         return stackView
     }
-    
+
     private func setRatingLabelColor(rating: Rating) {
         switch rating.rate {
         case 0..<1.5:

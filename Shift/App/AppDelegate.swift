@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     extension AppDelegate {
 
         func logDatabaseURL(_ url: String) {
-            print("[Core Data] - Database url: \(url)")
+            print("[CoreData] - Database url: \(url)")
         }
     }
 #endif
