@@ -65,8 +65,6 @@ final class MainViewController: UIViewController {
 extension MainViewController {
 
     private func setupUI() {
-        view.backgroundColor = .systemBackground
-
         let container = CustomScreenContainerView()
         view.addSubview(container)
 
@@ -96,7 +94,7 @@ extension MainViewController {
         container.addSubview(productsTableViewContainer)
 
         productsTableViewContainer.snp.makeConstraints { make in
-            make.top.equalTo(screenTitleLabel.snp.bottom).offset(20)
+            make.top.equalTo(screenTitleLabel.snp.bottom).offset(40)
             make.bottom.equalTo(greetingButton.snp.top).offset(-40)
             make.leading.equalTo(container.layoutMarginsGuide.snp.leading)
             make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
@@ -124,6 +122,7 @@ extension MainViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 60
+        tableView.sectionHeaderTopPadding = 0
 
         tableView.register(
             ProductsTableViewCell.self,
@@ -135,7 +134,8 @@ extension MainViewController {
 
     private func createGreetingButton() -> UIButton {
         let button = CustomButton(
-            title: "Приветствие"
+            title: "Приветствие",
+            variant: .primary
         )
 
         button.addTarget(
@@ -195,7 +195,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return 45
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {

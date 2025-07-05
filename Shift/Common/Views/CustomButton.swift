@@ -10,15 +10,24 @@ import UIKit
 
 final class CustomButton: UIButton {
 
+    enum ButtonVariant {
+        case primary
+        case ok
+        case cancel
+    }
+
+    private var variant: ButtonVariant
+    private let BUTTON_HEIGHT: CGFloat = 44
+
     override var isEnabled: Bool {
         didSet {
             updateAppearance()
         }
     }
 
-    private let BUTTON_HEIGHT: CGFloat = 44
+    init(title: String, variant: ButtonVariant) {
+        self.variant = variant
 
-    init(title: String) {
         super.init(frame: .zero)
 
         self.layer.cornerRadius = BUTTON_HEIGHT / 2
@@ -43,6 +52,18 @@ final class CustomButton: UIButton {
     }
 
     private func updateAppearance() {
-        self.backgroundColor = isEnabled ? .systemBlue : .gray
+        guard isEnabled else {
+            backgroundColor = .gray
+            return
+        }
+
+        switch variant {
+        case .primary:
+            backgroundColor = .customBlue
+        case .ok:
+            backgroundColor = .customGreen
+        case .cancel:
+            backgroundColor = .customRed
+        }
     }
 }

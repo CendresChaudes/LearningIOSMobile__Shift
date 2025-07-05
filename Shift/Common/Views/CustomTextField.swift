@@ -30,7 +30,7 @@ final class CustomTextField: UITextField {
         self.attributedPlaceholder = NSAttributedString(
             string: placeholder,
             attributes: [
-                NSAttributedString.Key.foregroundColor: UIColor.lightGray
+                NSAttributedString.Key.foregroundColor: UIColor.gray
             ]
         )
 
@@ -42,7 +42,7 @@ final class CustomTextField: UITextField {
         self.clearButtonMode = .always
 
         self.snp.makeConstraints { make in
-            make.height.equalTo(40)
+            make.height.equalTo(44)
         }
     }
 

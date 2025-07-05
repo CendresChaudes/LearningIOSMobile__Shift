@@ -21,6 +21,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = SignUpViewController()
         window?.makeKeyAndVisible()
+
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = window!.bounds
+        gradientLayer.colors = [
+            UIColor.customOrange.cgColor,
+            UIColor.customPink.cgColor,
+        ]
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
+
+        window?.layer.insertSublayer(gradientLayer, at: 0)
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {

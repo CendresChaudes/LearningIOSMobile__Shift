@@ -56,7 +56,7 @@ extension ProductsTableViewCell {
         contentView.addSubview(stackView)
 
         stackView.snp.makeConstraints {
-            $0.top.bottom.leading.trailing.equalToSuperview().inset(4)
+            $0.top.bottom.leading.trailing.equalToSuperview().inset(12)
         }
 
         idLabel.snp.makeConstraints {

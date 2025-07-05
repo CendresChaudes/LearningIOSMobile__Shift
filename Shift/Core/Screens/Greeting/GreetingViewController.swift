@@ -59,7 +59,16 @@ final class GreetingViewController: UIViewController {
 extension GreetingViewController {
 
     private func setupUI() {
-        view.backgroundColor = .systemBackground
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = view.bounds
+        gradientLayer.colors = [
+            UIColor.customOrange.cgColor,
+            UIColor.customBlueLight.cgColor,
+        ]
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
+
+        view?.layer.insertSublayer(gradientLayer, at: 0)
 
         let container = CustomScreenContainerView()
         view.addSubview(container)
@@ -90,7 +99,7 @@ extension GreetingViewController {
         container.addSubview(greetingLabelContainerView)
 
         greetingLabelContainerView.snp.makeConstraints { make in
-            make.top.equalTo(screenTitleLabel.snp.bottom).offset(40)
+            make.top.equalTo(screenTitleLabel.snp.bottom).offset(50)
             make.bottom.equalTo(buttonsStackView.snp.top).offset(-40)
             make.leading.equalTo(container.layoutMarginsGuide.snp.leading)
             make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
@@ -134,10 +143,9 @@ extension GreetingViewController {
 
     private func createHelloButton() -> UIButton {
         let button = CustomButton(
-            title: "Привет :)"
+            title: "Привет :)",
+            variant: .ok
         )
-
-        button.backgroundColor = .systemGreen
 
         button.addTarget(
             self,
@@ -150,10 +158,9 @@ extension GreetingViewController {
 
     private func createNotHelloButton() -> UIButton {
         let button = CustomButton(
-            title: "Не привет :("
+            title: "Не привет :(",
+            variant: .cancel
         )
-
-        button.backgroundColor = .systemRed
 
         button.addTarget(
             self,

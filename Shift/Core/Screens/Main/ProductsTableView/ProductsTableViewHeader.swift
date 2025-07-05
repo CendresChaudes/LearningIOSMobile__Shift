@@ -58,7 +58,7 @@ extension ProductsTableViewHeader {
         self.addSubview(stackView)
 
         stackView.snp.makeConstraints {
-            $0.top.bottom.leading.trailing.equalToSuperview().inset(2)
+            $0.top.bottom.leading.trailing.equalToSuperview().inset(12)
         }
 
         idLabel.snp.makeConstraints {

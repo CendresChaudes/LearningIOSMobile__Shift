@@ -62,8 +62,6 @@ final class SignUpViewController: UIViewController {
 extension SignUpViewController {
 
     private func setupUI() {
-        view.backgroundColor = .white
-
         let container = CustomScreenContainerView()
         view.addSubview(container)
 
@@ -93,7 +91,7 @@ extension SignUpViewController {
         container.addSubview(scrollView)
 
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(screenTitleLabel.snp.bottom).offset(40)
+            make.top.equalTo(screenTitleLabel.snp.bottom).offset(50)
             make.bottom.equalTo(signUpButton.snp.top).offset(-40)
             make.leading.equalTo(container.layoutMarginsGuide.snp.leading)
             make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
@@ -226,7 +224,8 @@ extension SignUpViewController {
 
     private func createSignUpButton() -> UIButton {
         let button = CustomButton(
-            title: "Зарегистрироваться"
+            title: "Зарегистрироваться",
+            variant: .primary
         )
 
         button.isEnabled = false
