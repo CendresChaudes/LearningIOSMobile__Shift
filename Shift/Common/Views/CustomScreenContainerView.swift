@@ -9,17 +9,17 @@ import UIKit
 
 final class CustomScreenContainerView: UIView {
 
-    private let verticalSpacing: CGFloat = 20
-    private let horizontalSpacing: CGFloat = 16
+    private let VERTICAL_SPACING: CGFloat = 20
+    private let HORIZONTAL_SPACING: CGFloat = 16
 
     init() {
         super.init(frame: .zero)
 
         self.layoutMargins = UIEdgeInsets(
-            top: verticalSpacing,
-            left: horizontalSpacing,
-            bottom: verticalSpacing,
-            right: horizontalSpacing
+            top: VERTICAL_SPACING,
+            left: HORIZONTAL_SPACING,
+            bottom: VERTICAL_SPACING,
+            right: HORIZONTAL_SPACING
         )
     }
 

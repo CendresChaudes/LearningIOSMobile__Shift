@@ -9,26 +9,23 @@ import Foundation
 
 final class SignUpValidator {
 
-    private static let onlyLettersAndSpacesRegex = "^[A-Za-zА-Яа-яЁё\\s]+$"
-
-    private static let passwordRegex =
-        "^(?=.*[a-zA-Zа-яА-Я])(?=.*[A-ZА-Я])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-zа-яА-Я\\d$@$!%*?&#]+$"
+    private static let ONLY_LETTERS_AND_SPACES_REGEX = "^[A-Za-zА-Яа-яЁё\\s]+$"
 
     static func validateNameTextField(name: String) -> String? {
         let trimmedValue = trimWhitespaces(from: name)
-        let regex = onlyLettersAndSpacesRegex
+        let regex = ONLY_LETTERS_AND_SPACES_REGEX
         let predicate = createPredicate(for: regex)
         let isValidByRegex = predicate.evaluate(with: trimmedValue)
 
-        let minLength = 2
-        let maxLength = 20
+        let MIN_LENGTH = 2
+        let MAX_LENGTH = 20
 
         var errorMessage: String?
 
-        if trimmedValue.count < minLength {
-            errorMessage = "Имя должно содержать не менее \(minLength) символов"
-        } else if trimmedValue.count > maxLength {
-            errorMessage = "Имя должно содержать не более \(maxLength) символов"
+        if trimmedValue.count < MIN_LENGTH {
+            errorMessage = "Имя должно содержать не менее \(MIN_LENGTH) символов"
+        } else if trimmedValue.count > MAX_LENGTH {
+            errorMessage = "Имя должно содержать не более \(MAX_LENGTH) символов"
         } else if !isValidByRegex {
             errorMessage = "Имя должно содержать только буквы и пробелы"
         } else {
@@ -40,19 +37,19 @@ final class SignUpValidator {
 
     static func validateSurnameTextField(surname: String) -> String? {
         let trimmedValue = trimWhitespaces(from: surname)
-        let regex = onlyLettersAndSpacesRegex
+        let regex = ONLY_LETTERS_AND_SPACES_REGEX
         let predicate = createPredicate(for: regex)
         let isValidByRegex = predicate.evaluate(with: trimmedValue)
 
-        let minLength = 2
-        let maxLength = 30
+        let MIN_LENGTH = 2
+        let MAX_LENGTH = 30
 
         var errorMessage: String?
 
-        if trimmedValue.count < minLength {
-            errorMessage = "Фамилия должна содержать не менее \(minLength) символов"
-        } else if trimmedValue.count > maxLength {
-            errorMessage = "Фамилия должна содержать не более \(maxLength) символов"
+        if trimmedValue.count < MIN_LENGTH {
+            errorMessage = "Фамилия должна содержать не менее \(MIN_LENGTH) символов"
+        } else if trimmedValue.count > MAX_LENGTH {
+            errorMessage = "Фамилия должна содержать не более \(MAX_LENGTH) символов"
         } else if !isValidByRegex {
             errorMessage = "Фамилия должна содержать только буквы и пробелы"
         } else {
@@ -71,17 +68,17 @@ final class SignUpValidator {
             return "Некорректный формат даты. Выберите дату из календаря"
         }
 
-        let minAge = 18
-        let maxAge = 130
+        let MIN_AGE = 18
+        let MAX_AGE = 130
         let actualAge = Calendar.current.dateComponents([.year], from: date, to: Date()).year ?? 0
 
         var errorMessage: String?
 
         switch actualAge {
-        case ..<minAge:
-            errorMessage = "Вам должно быть не меньше \(minAge) лет"
-        case (maxAge + 1)...:
-            errorMessage = "Вы не можете быть старше \(maxAge) лет"
+        case ..<MIN_AGE:
+            errorMessage = "Вам должно быть не меньше \(MIN_AGE) лет"
+        case (MAX_AGE + 1)...:
+            errorMessage = "Вы не можете быть старше \(MAX_AGE) лет"
         default:
             errorMessage = nil
         }
@@ -90,20 +87,23 @@ final class SignUpValidator {
     }
 
     static func validatePasswordTextField(password: String) -> String? {
+        let PASSWORD_REGEX =
+            "^(?=.*[a-zA-Zа-яА-Я])(?=.*[A-ZА-Я])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-zа-яА-Я\\d$@$!%*?&#]+$"
+
         let trimmedValue = trimWhitespaces(from: password)
-        let regex = passwordRegex
+        let regex = PASSWORD_REGEX
         let predicate = createPredicate(for: regex)
         let isValidByRegex = predicate.evaluate(with: trimmedValue)
 
-        let minLength = 8
-        let maxLength = 30
+        let MIN_LENGTH = 8
+        let MAX_LENGTH = 30
 
         var errorMessage: String?
 
-        if trimmedValue.count < minLength {
-            errorMessage = "Пароль должен содержать не менее \(minLength) символов"
-        } else if trimmedValue.count > maxLength {
-            errorMessage = "Пароль должен содержать не более \(maxLength) символов"
+        if trimmedValue.count < MIN_LENGTH {
+            errorMessage = "Пароль должен содержать не менее \(MIN_LENGTH) символов"
+        } else if trimmedValue.count > MAX_LENGTH {
+            errorMessage = "Пароль должен содержать не более \(MAX_LENGTH) символов"
         } else if !isValidByRegex {
             errorMessage =
                 "Пароль должен содержать хотя бы одну заглавную букву, одну строчную букву, одну цифру и один специальный символ"
@@ -115,7 +115,8 @@ final class SignUpValidator {
     }
 
     static func validateConfirmPasswordTextField(password: String, confirmPassword: String)
-        -> String? {
+        -> String?
+    {
         password == confirmPassword ? nil : "Пароли не совпадают"
     }
 

@@ -16,12 +16,12 @@ final class CustomButton: UIButton {
         }
     }
 
-    private let buttonHeight: CGFloat = 44
+    private let BUTTON_HEIGHT: CGFloat = 44
 
     init(title: String) {
         super.init(frame: .zero)
 
-        self.layer.cornerRadius = buttonHeight / 2
+        self.layer.cornerRadius = BUTTON_HEIGHT / 2
         self.setTitle(title, for: .normal)
         self.titleLabel?.font = .systemFont(ofSize: 22, weight: .bold)
         self.setTitleColor(.white, for: .normal)
@@ -29,7 +29,7 @@ final class CustomButton: UIButton {
         self.isEnabled = true
 
         self.snp.makeConstraints { make in
-            make.height.equalTo(buttonHeight)
+            make.height.equalTo(BUTTON_HEIGHT)
         }
     }
 
