@@ -39,7 +39,8 @@ file_length:
 
 # Правило для контроля длины имен типов
 type_name:
-  min_length: 3
+  min_length:
+    warning: 1
   max_length:
     warning: 40
 
@@ -50,7 +51,10 @@ force_cast:
 # Правило для контроля имен идентификаторов
 identifier_name:
   allowed_symbols: ["_"]
-  type: all
+  min_length:
+    warning: 1
+  max_length:
+    warning: 40
   excluded:
     - snake_case
     - kebab-case

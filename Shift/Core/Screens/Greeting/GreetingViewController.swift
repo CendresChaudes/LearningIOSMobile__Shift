@@ -43,7 +43,7 @@ extension GreetingViewController {
             make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
         }
 
-        let greetingLabel = CustomParagraphLabel(title: "Привет, \(userName!)!")
+        let greetingLabel = CustomParagraphLabel(text: "Привет, \(userName!)!", fontSize: 24)
         container.addSubview(greetingLabel)
 
         greetingLabel.snp.makeConstraints { make in

@@ -9,18 +9,23 @@ import UIKit
 
 final class CustomParagraphLabel: UILabel {
 
-    init(title: String) {
+    init(
+        text: String,
+        fontSize: CGFloat,
+        textColor: UIColor = .black,
+        fontWeight: UIFont.Weight = .regular
+    ) {
         super.init(frame: .zero)
 
-        self.text = title
-        self.font = .systemFont(ofSize: 24, weight: .regular)
-        self.textColor = .black
+        self.text = text
+        self.font = .systemFont(ofSize: fontSize, weight: fontWeight)
+        self.textColor = textColor
     }
 
     @available(
         *,
         unavailable,
-        message: "This initializer is not available. Use init(title:) instead."
+        message: "This initializer is not available. Use init(text:) instead."
     )
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

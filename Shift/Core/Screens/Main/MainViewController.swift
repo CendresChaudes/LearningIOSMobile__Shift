@@ -10,7 +10,17 @@ import UIKit
 
 final class MainViewController: UIViewController {
 
+    private var productsTableView: UITableView!
+
     private var viewModel: MainViewModel!
+
+    private let PRODUCTS_TABLE_VIEW_CELL = "PRODUCTS_TABLE_VIEW_CELL"
+
+    private var products: [Product] = [] {
+        didSet {
+            productsTableView.reloadData()
+        }
+    }
 
     // MARK: - View lifecycle
 
@@ -26,6 +36,21 @@ final class MainViewController: UIViewController {
 
     private func setupViewModel() {
         viewModel = MainViewModel()
+        loadProducts()
+    }
+
+    private func loadProducts() {
+        viewModel.getProducts { [unowned self] result in
+            switch result {
+            case .success(let products):
+                self.products = products
+            case .failure:
+                self.showAlert(
+                    title: "Ошибка",
+                    message: "Не удалось загрузить товары. Попробуйте еще раз"
+                )
+            }
+        }
     }
 }
 
@@ -42,8 +67,6 @@ extension MainViewController {
         container.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
-
-        let productsTableView = createProductsTable()
 
         let screenTitleLabel = CustomScreenTitleLabel(title: "Главный экран")
         container.addSubview(screenTitleLabel)
@@ -62,22 +85,32 @@ extension MainViewController {
             make.leading.equalTo(container.layoutMarginsGuide.snp.leading)
             make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
         }
+
+        productsTableView = createProductsViewTable()
+        view.addSubview(productsTableView)
+
+        productsTableView.snp.makeConstraints { make in
+            make.top.equalTo(screenTitleLabel.snp.bottom).offset(20)
+            make.bottom.equalTo(greetingButton.snp.top).offset(-40)
+            make.leading.equalTo(container.layoutMarginsGuide.snp.leading)
+            make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
+        }
     }
 
     // MARK: - UI components impls
 
-    private func createProductsTable() {
-        viewModel.getProducts { [unowned self] result in
-            switch result {
-            case .success:
-                0
-            case .failure:
-                self.showAlert(
-                    title: "Ошибка",
-                    message: "Не удалось загрузить товары. Попробуйте еще раз"
-                )
-            }
-        }
+    private func createProductsViewTable() -> UITableView {
+        let tableView = UITableView()
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.rowHeight = 50
+
+        tableView.register(
+            ProductsTableViewCell.self,
+            forCellReuseIdentifier: PRODUCTS_TABLE_VIEW_CELL
+        )
+
+        return tableView
     }
 
     private func createGreetingButton() -> UIButton {
@@ -129,5 +162,45 @@ extension MainViewController {
         greetingVC.modalPresentationStyle = .pageSheet
         greetingVC.userName = userName
         present(greetingVC, animated: true)
+    }
+}
+
+// MARK: - UITableViewDataSource, UITableViewDelegate
+
+extension MainViewController: UITableViewDataSource, UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        ProductsTableViewHeader()
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        1
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        products.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell =
+            tableView.dequeueReusableCell(withIdentifier: PRODUCTS_TABLE_VIEW_CELL, for: indexPath)
+            as! ProductsTableViewCell
+
+        let product = products[indexPath.row]
+        cell.set(with: product)
+
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        false
+    }
+
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        false
     }
 }
