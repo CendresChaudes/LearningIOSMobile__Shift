@@ -47,16 +47,16 @@ extension ProductsTableViewCell {
         backgroundColor = .clear
         selectionStyle = .none
 
-        idLabel = CustomParagraphLabel(text: "N/A", fontSize: 20)
-        titleLabel = CustomParagraphLabel(text: "N/A", fontSize: 20)
-        priceLabel = CustomParagraphLabel(text: "N/A", fontSize: 20)
-        ratingLabel = CustomParagraphLabel(text: "N/A", fontSize: 20)
+        idLabel = CustomParagraphLabel(text: "N/A", fontSize: 18)
+        titleLabel = CustomParagraphLabel(text: "N/A", fontSize: 18)
+        priceLabel = CustomParagraphLabel(text: "N/A", fontSize: 18)
+        ratingLabel = CustomParagraphLabel(text: "N/A", fontSize: 18)
 
         let stackView = createFieldStackView(for: [idLabel, titleLabel, priceLabel, ratingLabel])
         contentView.addSubview(stackView)
 
         stackView.snp.makeConstraints {
-            $0.top.bottom.leading.trailing.equalToSuperview()
+            $0.top.bottom.leading.trailing.equalToSuperview().inset(4)
         }
 
         idLabel.snp.makeConstraints {

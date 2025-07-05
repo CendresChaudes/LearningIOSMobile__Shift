@@ -41,8 +41,8 @@ extension ProductsTableViewHeader {
         titleLabel = CustomParagraphLabel(text: "Название", fontSize: 20)
         priceLabel = CustomParagraphLabel(text: "Цена", fontSize: 20)
 
-        ratingImage = UIImageView(image: UIImage(systemName: "star"))
-        ratingImage.tintColor = .magenta
+        ratingImage = UIImageView(image: UIImage(systemName: "star.fill"))
+        ratingImage.tintColor = .systemCyan
         let ratingImageContainer = UIView()
         ratingImageContainer.addSubview(ratingImage)
 
@@ -78,7 +78,7 @@ extension ProductsTableViewHeader {
         }
 
         ratingImage.snp.makeConstraints {
-            $0.leading.equalTo(ratingImageContainer.snp.leading).offset(1)
+            $0.leading.equalTo(ratingImageContainer.snp.leading).offset(-4)
             $0.centerY.equalTo(ratingImageContainer.snp.centerY)
             $0.width.height.equalTo(30)
         }
