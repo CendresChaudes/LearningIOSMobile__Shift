@@ -43,6 +43,8 @@ extension MainViewController {
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
 
+        let productsTableView = createProductsTable()
+
         let screenTitleLabel = CustomScreenTitleLabel(title: "Главный экран")
         container.addSubview(screenTitleLabel)
 
@@ -63,6 +65,20 @@ extension MainViewController {
     }
 
     // MARK: - UI components impls
+
+    private func createProductsTable() {
+        viewModel.getProducts { [unowned self] result in
+            switch result {
+            case .success(let products):
+                print(products)
+            case .failure:
+                self.showAlert(
+                    title: "Ошибка",
+                    message: "Не удалось загрузить товары. Попробуйте еще раз"
+                )
+            }
+        }
+    }
 
     private func createGreetingButton() -> UIButton {
         let button = CustomButton(
