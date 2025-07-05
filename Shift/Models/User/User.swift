@@ -12,6 +12,7 @@ import Foundation
 final class User: NSManagedObject {}
 
 extension User {
+
     @NSManaged var id: UUID
     @NSManaged var name: String
     @NSManaged var surname: String

@@ -7,6 +7,7 @@
 
 @MainActor
 protocol DataManagerProtocol {
+
     func insert<T>(_ object: T) throws
 
     func fetch<T>(_ request: Any) throws -> [T]?

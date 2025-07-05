@@ -5,11 +5,11 @@
 //  Created by Роман on 03.07.2025.
 //
 
-import CoreData
 import Foundation
 
 @MainActor
 final class MainViewModel {
+
     private let userStorageManager = UserStorageManager.shared
 
     func getUser() throws -> User {

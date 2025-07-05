@@ -9,6 +9,7 @@ import SnapKit
 import UIKit
 
 final class CustomButton: UIButton {
+
     override var isEnabled: Bool {
         didSet {
             updateAppearance()

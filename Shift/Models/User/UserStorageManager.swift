@@ -5,11 +5,11 @@
 //  Created by Роман on 03.07.2025.
 //
 
-import UIKit
 import CoreData
 
 @MainActor
 final class UserStorageManager {
+
     static let shared = UserStorageManager()
 
     private let dataManager = CoreDataManager.shared
