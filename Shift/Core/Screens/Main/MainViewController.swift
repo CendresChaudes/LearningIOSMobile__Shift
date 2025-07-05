@@ -11,6 +11,7 @@ import UIKit
 final class MainViewController: UIViewController {
 
     private var productsTableView: UITableView!
+    private var productsLoadingSpinner: UIActivityIndicatorView!
 
     private var viewModel: MainViewModel!
 
@@ -27,28 +28,33 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupViewModel()
-
         setupUI()
+
+        setupViewModel()
+        loadProducts()
     }
 
     // MARK: - Setup view model
 
     private func setupViewModel() {
         viewModel = MainViewModel()
-        loadProducts()
     }
 
     private func loadProducts() {
+        showProductsLoadingSpinner()
+
         viewModel.getProducts { [unowned self] result in
             switch result {
             case .success(let products):
                 self.products = products
+                dismissProductsLoadingSpinner()
             case .failure:
                 self.showAlert(
                     title: "Ошибка",
                     message: "Не удалось загрузить товары. Попробуйте еще раз"
                 )
+
+                dismissProductsLoadingSpinner()
             }
         }
     }
@@ -86,14 +92,28 @@ extension MainViewController {
             make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
         }
 
-        productsTableView = createProductsViewTable()
-        view.addSubview(productsTableView)
+        let productsTableViewContainer = UIView()
+        container.addSubview(productsTableViewContainer)
 
-        productsTableView.snp.makeConstraints { make in
+        productsTableViewContainer.snp.makeConstraints { make in
             make.top.equalTo(screenTitleLabel.snp.bottom).offset(20)
             make.bottom.equalTo(greetingButton.snp.top).offset(-40)
             make.leading.equalTo(container.layoutMarginsGuide.snp.leading)
             make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
+        }
+
+        productsTableView = createProductsViewTable()
+        productsTableViewContainer.addSubview(productsTableView)
+
+        productsTableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
+        productsLoadingSpinner = CustomSpinner()
+        productsTableViewContainer.addSubview(productsLoadingSpinner)
+
+        productsLoadingSpinner.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
     }
 
@@ -103,7 +123,7 @@ extension MainViewController {
         let tableView = UITableView()
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.rowHeight = 50
+        tableView.rowHeight = 60
 
         tableView.register(
             ProductsTableViewCell.self,
@@ -129,15 +149,7 @@ extension MainViewController {
 
     @objc
     private func handleGreetingButtonTouchedUpInside() {
-        do {
-            let user = try viewModel.getUser()
-            openGreetingModal(for: user.name)
-        } catch {
-            showAlert(
-                title: "Ошибка",
-                message: "Не удалось загрузить данные. Попробуйте еще раз"
-            )
-        }
+        openGreetingModal()
     }
 
     private func showAlert(title: String, message: String) {
@@ -151,16 +163,25 @@ extension MainViewController {
         alertController.addAction(okAction)
         present(alertController, animated: true)
     }
+
+    private func showProductsLoadingSpinner() {
+        productsLoadingSpinner.startAnimating()
+        productsTableView.layer.opacity = 0.3
+    }
+
+    private func dismissProductsLoadingSpinner() {
+        productsLoadingSpinner.stopAnimating()
+        productsTableView.layer.opacity = 1
+    }
 }
 
 // MARK: - Navigation
 
 extension MainViewController {
 
-    private func openGreetingModal(for userName: String) {
+    private func openGreetingModal() {
         let greetingVC = GreetingViewController()
         greetingVC.modalPresentationStyle = .pageSheet
-        greetingVC.userName = userName
         present(greetingVC, animated: true)
     }
 }

@@ -9,7 +9,16 @@ import UIKit
 
 final class GreetingViewController: UIViewController {
 
-    var userName: String!
+    private var greetingLabel: UILabel!
+    private var userLoadingSpinner: UIActivityIndicatorView!
+
+    private var viewModel: GreetingViewModel!
+
+    private var userName: String = "Неизвестный" {
+        didSet {
+            setGreetingLabelText()
+        }
+    }
 
     // MARK: - View lifecycle
 
@@ -17,6 +26,31 @@ final class GreetingViewController: UIViewController {
         super.viewDidLoad()
 
         setupUI()
+
+        setupViewModel()
+        loadUser()
+    }
+
+    // MARK: - Setup view model
+
+    private func setupViewModel() {
+        viewModel = GreetingViewModel()
+    }
+
+    private func loadUser() {
+        do {
+            showUserLoadingSpinner()
+            let user = try viewModel.getUser()
+            userName = user.name
+            dismissUserLoadingSpinner()
+        } catch {
+            dismissUserLoadingSpinner()
+
+            showAlert(
+                title: "Ошибка",
+                message: "Не удалось загрузить данные. Попробуйте еще раз"
+            )
+        }
     }
 }
 
@@ -43,14 +77,6 @@ extension GreetingViewController {
             make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
         }
 
-        let greetingLabel = CustomParagraphLabel(text: "Привет, \(userName!)!", fontSize: 24)
-        container.addSubview(greetingLabel)
-
-        greetingLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(container)
-            make.centerY.equalTo(container)
-        }
-
         let buttonsStackView = createButtonsStackView()
         container.addSubview(buttonsStackView)
 
@@ -59,9 +85,39 @@ extension GreetingViewController {
             make.leading.equalTo(container.layoutMarginsGuide.snp.leading)
             make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
         }
+
+        let greetingLabelContainerView = UIView()
+        container.addSubview(greetingLabelContainerView)
+
+        greetingLabelContainerView.snp.makeConstraints { make in
+            make.top.equalTo(screenTitleLabel.snp.bottom).offset(40)
+            make.bottom.equalTo(buttonsStackView.snp.top).offset(-40)
+            make.leading.equalTo(container.layoutMarginsGuide.snp.leading)
+            make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
+        }
+
+        greetingLabel = CustomParagraphLabel(text: "", fontSize: 24)
+        setGreetingLabelText()
+        greetingLabelContainerView.addSubview(greetingLabel)
+
+        greetingLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(greetingLabelContainerView)
+            make.centerY.equalTo(greetingLabelContainerView)
+        }
+
+        userLoadingSpinner = CustomSpinner()
+        greetingLabelContainerView.addSubview(userLoadingSpinner)
+
+        userLoadingSpinner.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
     }
 
     // MARK: - UI components impls
+
+    private func setGreetingLabelText() {
+        greetingLabel.text = "Привет, \(userName)!"
+    }
 
     private func createButtonsStackView() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [
@@ -108,6 +164,33 @@ extension GreetingViewController {
         return button
     }
 
+    @objc
+    private func handleGreetingModalScreenDismiss() {
+        dismiss(animated: true)
+    }
+
+    private func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+
+        let okAction = UIAlertAction(title: "Закрыть", style: .default)
+        alertController.addAction(okAction)
+        present(alertController, animated: true)
+    }
+
+    private func showUserLoadingSpinner() {
+        userLoadingSpinner.startAnimating()
+        greetingLabel.layer.opacity = 0.3
+    }
+
+    private func dismissUserLoadingSpinner() {
+        userLoadingSpinner.stopAnimating()
+        greetingLabel.layer.opacity = 1
+    }
+
     // MARK: - UI components bases
 
     private func createFieldStackView(for arrangedSubviews: [UIView]) -> UIStackView {
@@ -117,10 +200,5 @@ extension GreetingViewController {
         stackView.spacing = 8
 
         return stackView
-    }
-
-    @objc
-    private func handleGreetingModalScreenDismiss() {
-        dismiss(animated: true)
     }
 }

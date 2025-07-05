@@ -11,7 +11,6 @@ import Foundation
 final class MainViewModel {
 
     private let productNetworkManager = ProductNetworkManager.shared
-    private let userStorageManager = UserStorageManager.shared
 
     func getProducts(completion: @escaping (Result<[Product], Error>) -> Void) {
         productNetworkManager.getProducts { result in
@@ -22,9 +21,5 @@ final class MainViewModel {
                 completion(.failure(error))
             }
         }
-    }
-
-    func getUser() throws -> User {
-        try userStorageManager.get()
     }
 }
