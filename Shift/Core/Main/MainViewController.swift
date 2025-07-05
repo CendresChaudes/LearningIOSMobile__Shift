@@ -69,8 +69,8 @@ extension MainViewController {
     private func createProductsTable() {
         viewModel.getProducts { [unowned self] result in
             switch result {
-            case .success(let products):
-                print(products)
+            case .success:
+                0
             case .failure:
                 self.showAlert(
                     title: "Ошибка",

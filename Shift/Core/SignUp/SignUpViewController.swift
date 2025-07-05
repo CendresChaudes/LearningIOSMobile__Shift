@@ -45,21 +45,15 @@ final class SignUpViewController: UIViewController {
         setupTextFieldDelegates()
         setupViewTapGesture()
 
-        setupDebug()
+        #if DEBUG
+            setupDebug()
+        #endif
     }
 
     // MARK: - Setup view model
 
     private func setupViewModel() {
         viewModel = SignUpViewModel()
-    }
-
-    // MARK: - Setup debug
-
-    private func setupDebug() {
-        #if DEBUG
-            setupFieldsValuesForDebug()
-        #endif
     }
 }
 
@@ -385,7 +379,8 @@ extension SignUpViewController {
             let surnameValue = surnameTextField.text, !surnameValue.isEmpty,
             let dateOfBirthValue = dateOfBirthTextField.text, !dateOfBirthValue.isEmpty,
             let passwordValue = passwordTextField.text, !passwordValue.isEmpty,
-            let confirmPasswordValue = confirmPasswordTextField.text, !confirmPasswordValue.isEmpty {
+            let confirmPasswordValue = confirmPasswordTextField.text, !confirmPasswordValue.isEmpty
+        {
             signUpButton.isEnabled = true
         } else {
             signUpButton.isEnabled = false
@@ -439,17 +434,23 @@ extension SignUpViewController: UITextFieldDelegate {
     }
 }
 
-// MARK: - Debug
+// MARK: - Setup debug
 
-extension SignUpViewController {
+#if DEBUG
+    extension SignUpViewController {
 
-    func setupFieldsValuesForDebug() {
-        nameTextField.text = "Роман"
-        surnameTextField.text = "Пронин"
-        dateOfBirthTextField.text = "20 марта 1997 г."
-        passwordTextField.text = "qwertyQ1!"
-        confirmPasswordTextField.text = "qwertyQ1!"
+        func setupDebug() {
+            setupFieldsValuesForDebug()
+        }
 
-        textFieldDidChange()
+        func setupFieldsValuesForDebug() {
+            nameTextField.text = "Роман"
+            surnameTextField.text = "Пронин"
+            dateOfBirthTextField.text = "20 марта 1997 г."
+            passwordTextField.text = "qwertyQ1!"
+            confirmPasswordTextField.text = "qwertyQ1!"
+
+            textFieldDidChange()
+        }
     }
-}
+#endif
