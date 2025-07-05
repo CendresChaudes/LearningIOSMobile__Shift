@@ -6,7 +6,9 @@
 //
 
 @MainActor
-protocol DataManagerProtocol {
+protocol StorageManagerProtocol {
+
+    static var shared: Self { get }
 
     func insert<T>(_ object: T) throws
 

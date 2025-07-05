@@ -9,9 +9,7 @@ import CoreData
 import UIKit
 
 @MainActor
-final class CoreDataManager: NSObject {
-
-    static let shared = CoreDataManager()
+final class StorageManager: NSObject {
 
     var context: NSManagedObjectContext {
         appDelegate.persistentContainer.viewContext
@@ -30,7 +28,9 @@ final class CoreDataManager: NSObject {
 
 // MARK: - DataManagerProtocol
 
-extension CoreDataManager: DataManagerProtocol {
+extension StorageManager: StorageManagerProtocol {
+
+    static let shared = StorageManager()
 
     func insert<T>(_ object: T) throws {
         guard let managedObject = object as? NSManagedObject else {

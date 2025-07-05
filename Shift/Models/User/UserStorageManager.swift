@@ -12,24 +12,24 @@ final class UserStorageManager {
 
     static let shared = UserStorageManager()
 
-    private let dataManager = CoreDataManager.shared
+    private let storageManager = StorageManager.shared
 
     private init() {}
 
     func save(name: String, surname: String, dateOfBirth: Date, password: String) throws {
-        let user = User(context: dataManager.context)
+        let user = User(context: storageManager.context)
         user.name = name
         user.surname = surname
         user.dateOfBirth = dateOfBirth
         user.password = password
 
-        try dataManager.insert(user)
+        try storageManager.insert(user)
     }
 
     func get() throws -> User {
         do {
             let fetchRequest = User.fetchRequest()
-            let users: [User]? = try dataManager.fetch(fetchRequest)
+            let users: [User]? = try storageManager.fetch(fetchRequest)
 
             guard let user = users?.last else {
                 throw NSError(
