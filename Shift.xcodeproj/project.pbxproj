@@ -12,6 +12,16 @@
 		B2646EAB2E143F92009A64BF /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = B2646EAA2E143F89009A64BF /* .swiftlint.yml */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		B2F12C5C2E1AB85F005AA02C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B25DBB2A2E14245E0077CB8F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B25DBB312E14245E0077CB8F;
+			remoteInfo = Shift;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		2BAD1A817FE8676A7968D10C /* Pods-Shift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shift.release.xcconfig"; path = "Target Support Files/Pods-Shift/Pods-Shift.release.xcconfig"; sourceTree = "<group>"; };
 		963CDD5CDB924D7C5ABC8936 /* Pods-Shift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shift.debug.xcconfig"; path = "Target Support Files/Pods-Shift/Pods-Shift.debug.xcconfig"; sourceTree = "<group>"; };
@@ -19,6 +29,7 @@
 		B25DBB322E14245E0077CB8F /* Shift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B25DBB642E1430110077CB8F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		B2646EAA2E143F89009A64BF /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		B2F12C582E1AB85F005AA02C /* ShiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -40,6 +51,13 @@
 			path = Shift;
 			sourceTree = "<group>";
 		};
+		B2F12C592E1AB85F005AA02C /* ShiftTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
+			path = ShiftTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +66,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AFBCA69B689E91B9FFF52FC /* Pods_Shift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2F12C552E1AB85F005AA02C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,6 +94,7 @@
 				B2646EAA2E143F89009A64BF /* .swiftlint.yml */,
 				B25DBB642E1430110077CB8F /* .gitignore */,
 				B25DBB342E14245E0077CB8F /* Shift */,
+				B2F12C592E1AB85F005AA02C /* ShiftTests */,
 				B25DBB332E14245E0077CB8F /* Products */,
 				220BDFA581866663875C2217 /* Pods */,
 				DED664558B040FC0F0B72E33 /* Frameworks */,
@@ -79,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				B25DBB322E14245E0077CB8F /* Shift.app */,
+				B2F12C582E1AB85F005AA02C /* ShiftTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -117,6 +144,27 @@
 			productReference = B25DBB322E14245E0077CB8F /* Shift.app */;
 			productType = "com.apple.product-type.application";
 		};
+		B2F12C572E1AB85F005AA02C /* ShiftTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B2F12C602E1AB85F005AA02C /* Build configuration list for PBXNativeTarget "ShiftTests" */;
+			buildPhases = (
+				B2F12C542E1AB85F005AA02C /* Sources */,
+				B2F12C552E1AB85F005AA02C /* Frameworks */,
+				B2F12C562E1AB85F005AA02C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B2F12C5D2E1AB85F005AA02C /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				B2F12C592E1AB85F005AA02C /* ShiftTests */,
+			);
+			name = ShiftTests;
+			productName = ShiftTests;
+			productReference = B2F12C582E1AB85F005AA02C /* ShiftTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -129,6 +177,10 @@
 				TargetAttributes = {
 					B25DBB312E14245E0077CB8F = {
 						CreatedOnToolsVersion = 16.4;
+					};
+					B2F12C572E1AB85F005AA02C = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = B25DBB312E14245E0077CB8F;
 					};
 				};
 			};
@@ -147,6 +199,7 @@
 			projectRoot = "";
 			targets = (
 				B25DBB312E14245E0077CB8F /* Shift */,
+				B2F12C572E1AB85F005AA02C /* ShiftTests */,
 			);
 		};
 /* End PBXProject section */
@@ -161,6 +214,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B2F12C562E1AB85F005AA02C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -172,13 +232,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Shift/Pods-Shift-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Shift/Pods-Shift-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -237,7 +293,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B2F12C542E1AB85F005AA02C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B2F12C5D2E1AB85F005AA02C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B25DBB312E14245E0077CB8F /* Shift */;
+			targetProxy = B2F12C5C2E1AB85F005AA02C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		B25DBB492E14245E0077CB8F /* Debug */ = {
@@ -433,6 +504,52 @@
 			};
 			name = Release;
 		};
+		B2F12C5E2E1AB85F005AA02C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S9449RGK8C;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ShiftTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Shift.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Shift";
+			};
+			name = Debug;
+		};
+		B2F12C5F2E1AB85F005AA02C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S9449RGK8C;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ShiftTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Shift.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Shift";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -450,6 +567,15 @@
 			buildConfigurations = (
 				B25DBB492E14245E0077CB8F /* Debug */,
 				B25DBB4A2E14245E0077CB8F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B2F12C602E1AB85F005AA02C /* Build configuration list for PBXNativeTarget "ShiftTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B2F12C5E2E1AB85F005AA02C /* Debug */,
+				B2F12C5F2E1AB85F005AA02C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
