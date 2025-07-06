@@ -1,5 +1,5 @@
 //
-//  CustomContainer.swift
+//  CustomScreenContainer.swift
 //  Shift
 //
 //  Created by Роман on 03.07.2025.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CustomScreenContainerView: UIView {
+final class CustomScreenContainer: UIView {
 
     private let VERTICAL_SPACING: CGFloat = 20
     private let HORIZONTAL_SPACING: CGFloat = 16

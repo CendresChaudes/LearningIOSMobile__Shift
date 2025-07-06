@@ -64,7 +64,7 @@ final class MainViewController: UIViewController {
 extension MainViewController {
 
     private func setupUI() {
-        let container = CustomScreenContainerView()
+        let container = CustomScreenContainer()
         view.addSubview(container)
 
         container.snp.makeConstraints {

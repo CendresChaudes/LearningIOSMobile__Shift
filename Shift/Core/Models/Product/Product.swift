@@ -1,5 +1,5 @@
 //
-//  Book.swift
+//  Product.swift
 //  Shift
 //
 //  Created by Роман on 05.07.2025.

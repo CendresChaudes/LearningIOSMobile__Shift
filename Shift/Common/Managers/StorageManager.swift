@@ -1,5 +1,5 @@
 //
-//  CoreDataManager.swift
+//  StorageManager.swift
 //  Shift
 //
 //  Created by Роман on 04.07.2025.

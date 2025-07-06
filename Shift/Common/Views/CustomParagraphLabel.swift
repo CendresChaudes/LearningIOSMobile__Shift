@@ -1,5 +1,5 @@
 //
-//  CustomScreenTitle.swift
+//  CustomParagraphLabel.swift
 //  Shift
 //
 //  Created by Роман on 03.07.2025.

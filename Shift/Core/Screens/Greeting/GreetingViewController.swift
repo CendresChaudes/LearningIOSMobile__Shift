@@ -1,5 +1,5 @@
 //
-//  GreetingModal.swift
+//  GreetingViewController.swift
 //  Shift
 //
 //  Created by Роман on 04.07.2025.
@@ -75,7 +75,7 @@ extension GreetingViewController {
 
         view?.layer.insertSublayer(gradientLayer, at: 0)
 
-        let container = CustomScreenContainerView()
+        let container = CustomScreenContainer()
         view.addSubview(container)
 
         container.snp.makeConstraints {

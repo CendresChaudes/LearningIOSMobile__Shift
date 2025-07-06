@@ -1,5 +1,5 @@
 //
-//  SignUpValidation.swift
+//  SignUpValidator.swift
 //  Shift
 //
 //  Created by Роман on 02.07.2025.

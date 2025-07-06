@@ -96,7 +96,7 @@ extension SignUpViewController {
             $0.center.equalToSuperview()
         }
 
-        container = CustomScreenContainerView()
+        container = CustomScreenContainer()
         view.addSubview(container)
 
         container.snp.makeConstraints {

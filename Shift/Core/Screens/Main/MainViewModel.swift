@@ -1,5 +1,5 @@
 //
-//  SignUpViewModel.swift
+//  MainViewModel.swift
 //  Shift
 //
 //  Created by Роман on 03.07.2025.
