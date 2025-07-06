@@ -37,8 +37,8 @@ final class CustomButton: UIButton {
         self.setTitleColor(.lightGray, for: .disabled)
         self.isEnabled = true
 
-        self.snp.makeConstraints { make in
-            make.height.equalTo(BUTTON_HEIGHT)
+        self.snp.makeConstraints {
+            $0.height.equalTo(BUTTON_HEIGHT)
         }
     }
 

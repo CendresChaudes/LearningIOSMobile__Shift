@@ -78,52 +78,52 @@ extension GreetingViewController {
         let container = CustomScreenContainerView()
         view.addSubview(container)
 
-        container.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+        container.snp.makeConstraints {
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
 
         let screenTitleLabel = CustomScreenTitleLabel(title: "Приветствие")
         container.addSubview(screenTitleLabel)
 
-        screenTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(container.layoutMarginsGuide.snp.top)
-            make.leading.equalTo(container.layoutMarginsGuide.snp.leading)
-            make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
+        screenTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(container.layoutMarginsGuide.snp.top)
+            $0.leading.equalTo(container.layoutMarginsGuide.snp.leading)
+            $0.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
         }
 
         let buttonsStackView = createButtonsStackView()
         container.addSubview(buttonsStackView)
 
-        buttonsStackView.snp.makeConstraints { make in
-            make.bottom.equalTo(container.layoutMarginsGuide.snp.bottom)
-            make.leading.equalTo(container.layoutMarginsGuide.snp.leading)
-            make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
+        buttonsStackView.snp.makeConstraints {
+            $0.bottom.equalTo(container.layoutMarginsGuide.snp.bottom)
+            $0.leading.equalTo(container.layoutMarginsGuide.snp.leading)
+            $0.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
         }
 
         let greetingLabelContainerView = UIView()
         container.addSubview(greetingLabelContainerView)
 
-        greetingLabelContainerView.snp.makeConstraints { make in
-            make.top.equalTo(screenTitleLabel.snp.bottom).offset(50)
-            make.bottom.equalTo(buttonsStackView.snp.top).offset(-40)
-            make.leading.equalTo(container.layoutMarginsGuide.snp.leading)
-            make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
+        greetingLabelContainerView.snp.makeConstraints {
+            $0.top.equalTo(screenTitleLabel.snp.bottom).offset(50)
+            $0.bottom.equalTo(buttonsStackView.snp.top).offset(-40)
+            $0.leading.equalTo(container.layoutMarginsGuide.snp.leading)
+            $0.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
         }
 
         greetingLabel = CustomParagraphLabel(text: "", fontSize: 24)
         setGreetingLabelText()
         greetingLabelContainerView.addSubview(greetingLabel)
 
-        greetingLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(greetingLabelContainerView)
-            make.centerY.equalTo(greetingLabelContainerView)
+        greetingLabel.snp.makeConstraints {
+            $0.centerX.equalTo(greetingLabelContainerView)
+            $0.centerY.equalTo(greetingLabelContainerView)
         }
 
         getUserLoadingSpinner = CustomSpinner()
         greetingLabelContainerView.addSubview(getUserLoadingSpinner)
 
-        getUserLoadingSpinner.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+        getUserLoadingSpinner.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
     }
 

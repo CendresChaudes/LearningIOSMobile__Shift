@@ -19,9 +19,9 @@ extension UITextField {
 
         let toolBar = UIToolbar()
 
-        toolBar.snp.makeConstraints { make in
-            make.height.equalTo(40)
-            make.width.equalTo(UIScreen.main.bounds.width)
+        toolBar.snp.makeConstraints {
+            $0.height.equalTo(40)
+            $0.width.equalTo(UIScreen.main.bounds.width)
         }
 
         let cancel = UIBarButtonItem(

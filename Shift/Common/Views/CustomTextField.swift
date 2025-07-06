@@ -13,8 +13,7 @@ final class CustomTextField: UITextField {
     override var textContentType: UITextContentType! {
         didSet {
             if textContentType == UITextContentType.password
-                || textContentType == UITextContentType.newPassword
-            {
+                || textContentType == UITextContentType.newPassword {
                 self.autocapitalizationType = .none
                 self.autocorrectionType = .no
             }
@@ -41,8 +40,8 @@ final class CustomTextField: UITextField {
 
         self.clearButtonMode = .always
 
-        self.snp.makeConstraints { make in
-            make.height.equalTo(44)
+        self.snp.makeConstraints {
+            $0.height.equalTo(44)
         }
     }
 

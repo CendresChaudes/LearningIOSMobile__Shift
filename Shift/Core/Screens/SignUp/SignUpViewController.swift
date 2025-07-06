@@ -92,58 +92,58 @@ extension SignUpViewController {
         getUserLoadingSpinner = CustomSpinner()
         view.addSubview(getUserLoadingSpinner)
 
-        getUserLoadingSpinner.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+        getUserLoadingSpinner.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
 
         container = CustomScreenContainerView()
         view.addSubview(container)
 
-        container.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+        container.snp.makeConstraints {
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
 
         let screenTitleLabel = CustomScreenTitleLabel(title: "Регистрация")
         container.addSubview(screenTitleLabel)
 
-        screenTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(container.layoutMarginsGuide.snp.top)
-            make.leading.equalTo(container.layoutMarginsGuide.snp.leading)
-            make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
+        screenTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(container.layoutMarginsGuide.snp.top)
+            $0.leading.equalTo(container.layoutMarginsGuide.snp.leading)
+            $0.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
         }
 
         signUpButton = createSignUpButton()
         container.addSubview(signUpButton)
 
-        signUpButton.snp.makeConstraints { make in
-            make.bottom.equalTo(container.layoutMarginsGuide.snp.bottom)
-            make.leading.equalTo(container.layoutMarginsGuide.snp.leading)
-            make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
+        signUpButton.snp.makeConstraints {
+            $0.bottom.equalTo(container.layoutMarginsGuide.snp.bottom)
+            $0.leading.equalTo(container.layoutMarginsGuide.snp.leading)
+            $0.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
         }
 
         let scrollView = UIScrollView()
         container.addSubview(scrollView)
 
-        scrollView.snp.makeConstraints { make in
-            make.top.equalTo(screenTitleLabel.snp.bottom).offset(50)
-            make.bottom.equalTo(signUpButton.snp.top).offset(-40)
-            make.leading.equalTo(container.layoutMarginsGuide.snp.leading)
-            make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
+        scrollView.snp.makeConstraints {
+            $0.top.equalTo(screenTitleLabel.snp.bottom).offset(50)
+            $0.bottom.equalTo(signUpButton.snp.top).offset(-40)
+            $0.leading.equalTo(container.layoutMarginsGuide.snp.leading)
+            $0.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
         }
 
         signUpLoadingSpinner = CustomSpinner()
         scrollView.addSubview(signUpLoadingSpinner)
 
-        signUpLoadingSpinner.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+        signUpLoadingSpinner.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
 
         fieldsStackView = createFieldsStackView()
         scrollView.addSubview(fieldsStackView)
 
-        fieldsStackView.snp.makeConstraints { make in
-            make.edges.equalTo(scrollView)
-            make.width.equalTo(scrollView)
+        fieldsStackView.snp.makeConstraints {
+            $0.edges.equalTo(scrollView)
+            $0.width.equalTo(scrollView)
         }
     }
 
@@ -457,8 +457,7 @@ extension SignUpViewController {
             let surnameValue = surnameTextField.text, !surnameValue.isEmpty,
             let dateOfBirthValue = dateOfBirthTextField.text, !dateOfBirthValue.isEmpty,
             let passwordValue = passwordTextField.text, !passwordValue.isEmpty,
-            let confirmPasswordValue = confirmPasswordTextField.text, !confirmPasswordValue.isEmpty
-        {
+            let confirmPasswordValue = confirmPasswordTextField.text, !confirmPasswordValue.isEmpty {
             signUpButton.isEnabled = true
         } else {
             signUpButton.isEnabled = false

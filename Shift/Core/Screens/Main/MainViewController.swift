@@ -67,50 +67,50 @@ extension MainViewController {
         let container = CustomScreenContainerView()
         view.addSubview(container)
 
-        container.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+        container.snp.makeConstraints {
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
 
         let screenTitleLabel = CustomScreenTitleLabel(title: "Главный экран")
         container.addSubview(screenTitleLabel)
 
-        screenTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(container.layoutMarginsGuide.snp.top)
-            make.leading.equalTo(container.layoutMarginsGuide.snp.leading)
-            make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
+        screenTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(container.layoutMarginsGuide.snp.top)
+            $0.leading.equalTo(container.layoutMarginsGuide.snp.leading)
+            $0.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
         }
 
         let greetingButton = createGreetingButton()
         container.addSubview(greetingButton)
 
-        greetingButton.snp.makeConstraints { make in
-            make.bottom.equalTo(container.layoutMarginsGuide.snp.bottom)
-            make.leading.equalTo(container.layoutMarginsGuide.snp.leading)
-            make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
+        greetingButton.snp.makeConstraints {
+            $0.bottom.equalTo(container.layoutMarginsGuide.snp.bottom)
+            $0.leading.equalTo(container.layoutMarginsGuide.snp.leading)
+            $0.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
         }
 
         let productsTableViewContainer = UIView()
         container.addSubview(productsTableViewContainer)
 
-        productsTableViewContainer.snp.makeConstraints { make in
-            make.top.equalTo(screenTitleLabel.snp.bottom).offset(40)
-            make.bottom.equalTo(greetingButton.snp.top).offset(-40)
-            make.leading.equalTo(container.layoutMarginsGuide.snp.leading)
-            make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
+        productsTableViewContainer.snp.makeConstraints {
+            $0.top.equalTo(screenTitleLabel.snp.bottom).offset(40)
+            $0.bottom.equalTo(greetingButton.snp.top).offset(-40)
+            $0.leading.equalTo(container.layoutMarginsGuide.snp.leading)
+            $0.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
         }
 
         productsTableView = createProductsViewTable()
         productsTableViewContainer.addSubview(productsTableView)
 
-        productsTableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+        productsTableView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
 
         productsLoadingSpinner = CustomSpinner()
         productsTableViewContainer.addSubview(productsLoadingSpinner)
 
-        productsLoadingSpinner.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+        productsLoadingSpinner.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
     }
 
