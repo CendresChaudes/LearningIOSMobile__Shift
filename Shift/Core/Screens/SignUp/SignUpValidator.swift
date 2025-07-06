@@ -88,7 +88,7 @@ final class SignUpValidator {
 
     static func validatePasswordTextField(password: String) -> String? {
         let PASSWORD_REGEX =
-            "^(?=.*[a-zA-Zа-яА-Я])(?=.*[A-ZА-Я])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-zа-яА-Я\\d$@$!%*?&#]+$"
+            "^(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*[a-zA-Zа-яА-Я])(?=.*\\d)(?=.*[a-zа-я\\d])(?=.*[A-ZА-Я\\d])(?=.*[a-zA-Zа-яА-Я\\d])(?=.*[$@$!%*?&#])(?=.*[a-zа-я$@$!%*?&#])(?=.*[A-ZА-Я$@$!%*?&#])(?=.*[a-zA-Zа-яА-Я$@$!%*?&#])(?=.*[\\d$@$!%*?&#])(?=.*[a-zа-я\\d$@$!%*?&#])(?=.*[A-ZА-Я\\d$@$!%*?&#])[A-Za-zа-яА-Я\\d$@$!%*?&#]+$"
 
         let trimmedValue = trimWhitespaces(from: password)
         let regex = PASSWORD_REGEX
@@ -115,7 +115,8 @@ final class SignUpValidator {
     }
 
     static func validateConfirmPasswordTextField(password: String, confirmPassword: String)
-        -> String? {
+        -> String?
+    {
         password == confirmPassword ? nil : "Пароли не совпадают"
     }
 
