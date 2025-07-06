@@ -12,7 +12,7 @@ final class GreetingViewModel {
 
     private let userStorageManager = UserStorageManager.shared
 
-    func getUser() throws -> User {
+    func getUser() throws -> User? {
         try userStorageManager.get()
     }
 }

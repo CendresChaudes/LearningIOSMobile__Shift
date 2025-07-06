@@ -30,17 +30,17 @@ final class UserStorageManager {
         try storageManager.insert(user)
     }
 
-    func get() throws -> User {
+    func get() throws -> User? {
         do {
             let fetchRequest = User.fetchRequest()
             let users: [User]? = try storageManager.fetch(fetchRequest)
 
             guard let user = users?.last else {
-                throw NSError(
-                    domain: "UserStorageManager",
-                    code: 1,
-                    userInfo: [NSLocalizedDescriptionKey: "Response must exist"]
-                )
+                #if DEBUG
+                    logData(nil, action: "Get")
+                #endif
+
+                return nil
             }
 
             #if DEBUG
@@ -63,7 +63,7 @@ final class UserStorageManager {
 #if DEBUG
     extension UserStorageManager {
 
-        func logData(_ data: User, action: String) {
+        func logData(_ data: User?, action: String) {
             print("[UserStorageManager/\(action)] - Data: \(data)")
         }
 

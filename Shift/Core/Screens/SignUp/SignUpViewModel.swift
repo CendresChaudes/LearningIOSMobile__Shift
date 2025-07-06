@@ -12,7 +12,16 @@ final class SignUpViewModel {
 
     private let userStorageManager = UserStorageManager.shared
 
-    func saveUser(name: String, surname: String, dateOfBirth: Date, password: String) throws {
+    func getUser() throws -> User? {
+        try userStorageManager.get()
+    }
+
+    func saveUser(
+        name: String,
+        surname: String,
+        dateOfBirth: Date,
+        password: String
+    ) throws {
         try userStorageManager.save(
             name: name,
             surname: surname,

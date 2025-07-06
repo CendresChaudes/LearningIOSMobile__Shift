@@ -12,6 +12,8 @@ final class SignUpViewController: UIViewController {
 
     private var viewModel: SignUpViewModel!
 
+    private var container: UIView!
+
     private var fieldsStackView: UIStackView!
 
     private var nameTextField: UITextField!
@@ -22,6 +24,7 @@ final class SignUpViewController: UIViewController {
 
     private var signUpButton: UIButton!
 
+    private var getUserLoadingSpinner: UIActivityIndicatorView!
     private var signUpLoadingSpinner: UIActivityIndicatorView!
 
     private var nameTextFieldErrorLabel: UILabel!
@@ -43,11 +46,12 @@ final class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupViewModel()
-
         setupUI()
         setupTextFieldDelegates()
         setupViewTapGesture()
+
+        setupViewModel()
+        loadUser()
 
         #if DEBUG
             setupDebug()
@@ -59,6 +63,25 @@ final class SignUpViewController: UIViewController {
     private func setupViewModel() {
         viewModel = SignUpViewModel()
     }
+
+    private func loadUser() {
+        showGetUserLoadingSpinner()
+
+        do {
+            if (try viewModel.getUser()) != nil {
+                DispatchQueue.main.async {
+                    self.openMainScreen()
+                }
+            }
+        } catch {
+            showAlert(
+                title: "Ошибка",
+                message: "Не удалось загрузить данные пользователя. Попробуйте еще раз"
+            )
+        }
+
+        dismissGetUserLoadingSpinner()
+    }
 }
 
 // MARK: - Setup UI
@@ -66,7 +89,14 @@ final class SignUpViewController: UIViewController {
 extension SignUpViewController {
 
     private func setupUI() {
-        let container = CustomScreenContainerView()
+        getUserLoadingSpinner = CustomSpinner()
+        view.addSubview(getUserLoadingSpinner)
+
+        getUserLoadingSpinner.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+
+        container = CustomScreenContainerView()
         view.addSubview(container)
 
         container.snp.makeConstraints { make in
@@ -190,8 +220,6 @@ extension SignUpViewController {
             let datePicker = field.inputView as? UIDatePicker
         else { return }
 
-        print(datePicker.date)
-
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ru_RU")
         dateFormatter.dateStyle = .medium
@@ -296,7 +324,7 @@ extension SignUpViewController {
         } catch {
             showAlert(
                 title: "Ошибка",
-                message: "Не удалось сохранить данные. Попробуйте еще раз"
+                message: "Не удалось зарегистрироваться. Попробуйте еще раз"
             )
         }
 
@@ -313,6 +341,16 @@ extension SignUpViewController {
         let okAction = UIAlertAction(title: "Закрыть", style: .default)
         alertController.addAction(okAction)
         present(alertController, animated: true)
+    }
+
+    private func showGetUserLoadingSpinner() {
+        getUserLoadingSpinner.startAnimating()
+        container.layer.opacity = 0.3
+    }
+
+    private func dismissGetUserLoadingSpinner() {
+        getUserLoadingSpinner.stopAnimating()
+        container.layer.opacity = 1
     }
 
     private func showSignUpLoadingSpinner() {

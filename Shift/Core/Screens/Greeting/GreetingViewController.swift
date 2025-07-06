@@ -9,8 +9,12 @@ import UIKit
 
 final class GreetingViewController: UIViewController {
 
+    private enum UserError: Error {
+        case userMustExist
+    }
+
     private var greetingLabel: UILabel!
-    private var userLoadingSpinner: UIActivityIndicatorView!
+    private var getUserLoadingSpinner: UIActivityIndicatorView!
 
     private var viewModel: GreetingViewModel!
 
@@ -38,19 +42,20 @@ final class GreetingViewController: UIViewController {
     }
 
     private func loadUser() {
-        do {
-            showUserLoadingSpinner()
-            let user = try viewModel.getUser()
-            userName = user.name
-            dismissUserLoadingSpinner()
-        } catch {
-            dismissUserLoadingSpinner()
+        showGetUserLoadingSpinner()
 
+        do {
+            guard let user = try viewModel.getUser() else { throw UserError.userMustExist }
+
+            userName = user.name
+        } catch {
             showAlert(
                 title: "Ошибка",
-                message: "Не удалось загрузить данные. Попробуйте еще раз"
+                message: "Не удалось загрузить данные пользователя. Попробуйте еще раз"
             )
         }
+
+        dismissGetUserLoadingSpinner()
     }
 }
 
@@ -114,10 +119,10 @@ extension GreetingViewController {
             make.centerY.equalTo(greetingLabelContainerView)
         }
 
-        userLoadingSpinner = CustomSpinner()
-        greetingLabelContainerView.addSubview(userLoadingSpinner)
+        getUserLoadingSpinner = CustomSpinner()
+        greetingLabelContainerView.addSubview(getUserLoadingSpinner)
 
-        userLoadingSpinner.snp.makeConstraints { make in
+        getUserLoadingSpinner.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
     }
@@ -188,13 +193,13 @@ extension GreetingViewController {
         present(alertController, animated: true)
     }
 
-    private func showUserLoadingSpinner() {
-        userLoadingSpinner.startAnimating()
+    private func showGetUserLoadingSpinner() {
+        getUserLoadingSpinner.startAnimating()
         greetingLabel.layer.opacity = 0.3
     }
 
-    private func dismissUserLoadingSpinner() {
-        userLoadingSpinner.stopAnimating()
+    private func dismissGetUserLoadingSpinner() {
+        getUserLoadingSpinner.stopAnimating()
         greetingLabel.layer.opacity = 1
     }
 

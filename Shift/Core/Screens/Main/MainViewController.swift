@@ -43,19 +43,18 @@ final class MainViewController: UIViewController {
     private func loadProducts() {
         showProductsLoadingSpinner()
 
-        viewModel.getProducts { [unowned self] result in
+        viewModel.getProducts { [weak self] result in
             switch result {
             case .success(let products):
-                self.products = products
-                dismissProductsLoadingSpinner()
+                self?.products = products
             case .failure:
-                self.showAlert(
+                self?.showAlert(
                     title: "Ошибка",
                     message: "Не удалось загрузить товары. Попробуйте еще раз"
                 )
-
-                dismissProductsLoadingSpinner()
             }
+
+            self?.dismissProductsLoadingSpinner()
         }
     }
 }

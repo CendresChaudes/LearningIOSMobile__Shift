@@ -13,10 +13,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Core Data
 
-    lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Shift")
+    var persistentContainer: NSPersistentContainer!
 
-        container.loadPersistentStores { [unowned self] description, error in
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
+        persistentContainer = NSPersistentContainer(name: "Shift")
+
+        persistentContainer.loadPersistentStores { [unowned self] description, error in
             if let error = error as NSError? {
                 print("Unresolved error \(error), \(error.userInfo)")
             } else {
@@ -26,8 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
-        return container
-    }()
+        return true
+    }
 
     func saveContext() throws {
         let context = persistentContainer.viewContext
