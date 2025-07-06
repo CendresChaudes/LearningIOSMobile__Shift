@@ -12,7 +12,7 @@ final class CustomScreenTitleLabel: UILabel {
     private let underlineView: UIView = {
         let view = UIView()
         view.backgroundColor = .customRed
-        
+
         return view
     }()
 

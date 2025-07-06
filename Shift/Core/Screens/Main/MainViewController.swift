@@ -211,8 +211,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             tableView.dequeueReusableCell(withIdentifier: PRODUCTS_TABLE_VIEW_CELL, for: indexPath)
             as! ProductsTableViewCell
 
-        let product = products[indexPath.row]
-        cell.set(with: product)
+        cell.set(with: products[indexPath.row])
 
         return cell
     }
