@@ -12,6 +12,8 @@ final class SignUpViewController: UIViewController {
 
     private var viewModel: SignUpViewModel!
 
+    private var fieldsStackView: UIStackView!
+
     private var nameTextField: UITextField!
     private var surnameTextField: UITextField!
     private var dateOfBirthTextField: UITextField!
@@ -19,6 +21,8 @@ final class SignUpViewController: UIViewController {
     private var confirmPasswordTextField: UITextField!
 
     private var signUpButton: UIButton!
+
+    private var signUpLoadingSpinner: UIActivityIndicatorView!
 
     private var nameTextFieldErrorLabel: UILabel!
     private var surnameTextFieldErrorLabel: UILabel!
@@ -97,7 +101,14 @@ extension SignUpViewController {
             make.trailing.equalTo(container.layoutMarginsGuide.snp.trailing)
         }
 
-        let fieldsStackView = createFieldsStackView()
+        signUpLoadingSpinner = CustomSpinner()
+        scrollView.addSubview(signUpLoadingSpinner)
+
+        signUpLoadingSpinner.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+
+        fieldsStackView = createFieldsStackView()
         scrollView.addSubview(fieldsStackView)
 
         fieldsStackView.snp.makeConstraints { make in
@@ -256,22 +267,40 @@ extension SignUpViewController {
 
             guard let dateOfBirthIso = dateFormatter.date(from: dateOfBirth) else { return }
 
-            do {
-                try viewModel.saveUser(
-                    name: name,
-                    surname: surname,
-                    dateOfBirth: dateOfBirthIso,
-                    password: password
-                )
-
-                openMainScreen()
-            } catch {
-                showAlert(
-                    title: "Ошибка",
-                    message: "Не удалось сохранить данные. Попробуйте еще раз"
-                )
-            }
+            signUpUser(
+                name: name,
+                surname: surname,
+                dateOfBirthIso: dateOfBirthIso,
+                password: password
+            )
         }
+    }
+
+    private func signUpUser(
+        name: String,
+        surname: String,
+        dateOfBirthIso: Date,
+        password: String
+    ) {
+        showSignUpLoadingSpinner()
+
+        do {
+            try viewModel.saveUser(
+                name: name,
+                surname: surname,
+                dateOfBirth: dateOfBirthIso,
+                password: password
+            )
+
+            openMainScreen()
+        } catch {
+            showAlert(
+                title: "Ошибка",
+                message: "Не удалось сохранить данные. Попробуйте еще раз"
+            )
+        }
+
+        dismissSignUpLoadingSpinner()
     }
 
     private func showAlert(title: String, message: String) {
@@ -284,6 +313,18 @@ extension SignUpViewController {
         let okAction = UIAlertAction(title: "Закрыть", style: .default)
         alertController.addAction(okAction)
         present(alertController, animated: true)
+    }
+
+    private func showSignUpLoadingSpinner() {
+        signUpLoadingSpinner.startAnimating()
+        fieldsStackView.layer.opacity = 0.3
+        signUpButton.isEnabled = false
+    }
+
+    private func dismissSignUpLoadingSpinner() {
+        signUpLoadingSpinner.stopAnimating()
+        fieldsStackView.layer.opacity = 1
+        signUpButton.isEnabled = true
     }
 
     // MARK: - UI components bases
@@ -378,7 +419,8 @@ extension SignUpViewController {
             let surnameValue = surnameTextField.text, !surnameValue.isEmpty,
             let dateOfBirthValue = dateOfBirthTextField.text, !dateOfBirthValue.isEmpty,
             let passwordValue = passwordTextField.text, !passwordValue.isEmpty,
-            let confirmPasswordValue = confirmPasswordTextField.text, !confirmPasswordValue.isEmpty {
+            let confirmPasswordValue = confirmPasswordTextField.text, !confirmPasswordValue.isEmpty
+        {
             signUpButton.isEnabled = true
         } else {
             signUpButton.isEnabled = false
