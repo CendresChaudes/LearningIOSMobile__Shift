@@ -409,7 +409,7 @@ extension SignUpViewController {
     private func openMainScreen() {
         let mainVC = MainViewController()
         mainVC.modalPresentationStyle = .fullScreen
-        present(mainVC, animated: true)
+        present(mainVC, animated: false)
     }
 }
 
