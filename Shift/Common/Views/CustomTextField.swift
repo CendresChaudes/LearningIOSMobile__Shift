@@ -30,7 +30,7 @@ final class CustomTextField: UITextField {
         self.attributedPlaceholder = NSAttributedString(
             string: placeholder,
             attributes: [
-                NSAttributedString.Key.foregroundColor: UIColor.gray
+                NSAttributedString.Key.foregroundColor: UIColor.lightGray
             ]
         )
 
