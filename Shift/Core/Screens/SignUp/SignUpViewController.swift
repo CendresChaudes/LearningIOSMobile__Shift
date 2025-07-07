@@ -223,8 +223,11 @@ extension SignUpViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ru_RU")
         dateFormatter.dateStyle = .medium
+        
         field.text = dateFormatter.string(from: datePicker.date)
         field.resignFirstResponder()
+        
+        textFieldDidChange()
     }
 
     private func createPasswordTextFieldStackView() -> UIStackView {
