@@ -10,6 +10,7 @@
 		6AFBCA69B689E91B9FFF52FC /* Pods_Shift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7BB107B3EEFFB2FD340846 /* Pods_Shift.framework */; };
 		B25DBB652E14301D0077CB8F /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = B25DBB642E1430110077CB8F /* .gitignore */; };
 		B2646EAB2E143F92009A64BF /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = B2646EAA2E143F89009A64BF /* .swiftlint.yml */; };
+		B2F12D6C2E1BC4CE005AA02C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B2F12D6B2E1BC4CE005AA02C /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +31,7 @@
 		B25DBB642E1430110077CB8F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		B2646EAA2E143F89009A64BF /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		B2F12C582E1AB85F005AA02C /* ShiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2F12D6B2E1BC4CE005AA02C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -89,6 +91,7 @@
 		B25DBB292E14245E0077CB8F = {
 			isa = PBXGroup;
 			children = (
+				B2F12D6B2E1BC4CE005AA02C /* README.md */,
 				B2646EAA2E143F89009A64BF /* .swiftlint.yml */,
 				B25DBB642E1430110077CB8F /* .gitignore */,
 				B25DBB342E14245E0077CB8F /* Shift */,
@@ -209,6 +212,7 @@
 			files = (
 				B2646EAB2E143F92009A64BF /* .swiftlint.yml in Resources */,
 				B25DBB652E14301D0077CB8F /* .gitignore in Resources */,
+				B2F12D6C2E1BC4CE005AA02C /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
