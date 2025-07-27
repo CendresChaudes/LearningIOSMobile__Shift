@@ -64,7 +64,8 @@ disabled_rules:
   
 included:
   - Shift
-  - ShiftTests
+  - ShiftTestsWithST
+  - ShiftTestsWithXCT
   
 excluded:
   - Pods

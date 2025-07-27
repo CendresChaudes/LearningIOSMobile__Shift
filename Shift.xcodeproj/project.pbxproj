@@ -21,6 +21,13 @@
 			remoteGlobalIDString = B25DBB312E14245E0077CB8F;
 			remoteInfo = Shift;
 		};
+		B2F1313E2E366074005AA02C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B25DBB2A2E14245E0077CB8F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B25DBB312E14245E0077CB8F;
+			remoteInfo = Shift;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -30,8 +37,9 @@
 		B25DBB322E14245E0077CB8F /* Shift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B25DBB642E1430110077CB8F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		B2646EAA2E143F89009A64BF /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
-		B2F12C582E1AB85F005AA02C /* ShiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2F12C582E1AB85F005AA02C /* ShiftTestsWithST.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShiftTestsWithST.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2F12D6B2E1BC4CE005AA02C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		B2F1313A2E366074005AA02C /* ShiftTestsWithXCT.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShiftTestsWithXCT.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -53,9 +61,14 @@
 			path = Shift;
 			sourceTree = "<group>";
 		};
-		B2F12C592E1AB85F005AA02C /* ShiftTests */ = {
+		B2F12C592E1AB85F005AA02C /* ShiftTestsWithST */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ShiftTests;
+			path = ShiftTestsWithST;
+			sourceTree = "<group>";
+		};
+		B2F1313B2E366074005AA02C /* ShiftTestsWithXCT */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ShiftTestsWithXCT;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -70,6 +83,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		B2F12C552E1AB85F005AA02C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2F131372E366074005AA02C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -95,7 +115,8 @@
 				B2646EAA2E143F89009A64BF /* .swiftlint.yml */,
 				B25DBB642E1430110077CB8F /* .gitignore */,
 				B25DBB342E14245E0077CB8F /* Shift */,
-				B2F12C592E1AB85F005AA02C /* ShiftTests */,
+				B2F12C592E1AB85F005AA02C /* ShiftTestsWithST */,
+				B2F1313B2E366074005AA02C /* ShiftTestsWithXCT */,
 				B25DBB332E14245E0077CB8F /* Products */,
 				220BDFA581866663875C2217 /* Pods */,
 				DED664558B040FC0F0B72E33 /* Frameworks */,
@@ -106,7 +127,8 @@
 			isa = PBXGroup;
 			children = (
 				B25DBB322E14245E0077CB8F /* Shift.app */,
-				B2F12C582E1AB85F005AA02C /* ShiftTests.xctest */,
+				B2F12C582E1AB85F005AA02C /* ShiftTestsWithST.xctest */,
+				B2F1313A2E366074005AA02C /* ShiftTestsWithXCT.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -145,9 +167,9 @@
 			productReference = B25DBB322E14245E0077CB8F /* Shift.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B2F12C572E1AB85F005AA02C /* ShiftTests */ = {
+		B2F12C572E1AB85F005AA02C /* ShiftTestsWithST */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B2F12C602E1AB85F005AA02C /* Build configuration list for PBXNativeTarget "ShiftTests" */;
+			buildConfigurationList = B2F12C602E1AB85F005AA02C /* Build configuration list for PBXNativeTarget "ShiftTestsWithST" */;
 			buildPhases = (
 				B2F12C542E1AB85F005AA02C /* Sources */,
 				B2F12C552E1AB85F005AA02C /* Frameworks */,
@@ -159,11 +181,34 @@
 				B2F12C5D2E1AB85F005AA02C /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				B2F12C592E1AB85F005AA02C /* ShiftTests */,
+				B2F12C592E1AB85F005AA02C /* ShiftTestsWithST */,
 			);
-			name = ShiftTests;
+			name = ShiftTestsWithST;
 			productName = ShiftTests;
-			productReference = B2F12C582E1AB85F005AA02C /* ShiftTests.xctest */;
+			productReference = B2F12C582E1AB85F005AA02C /* ShiftTestsWithST.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B2F131392E366074005AA02C /* ShiftTestsWithXCT */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B2F131422E366074005AA02C /* Build configuration list for PBXNativeTarget "ShiftTestsWithXCT" */;
+			buildPhases = (
+				B2F131362E366074005AA02C /* Sources */,
+				B2F131372E366074005AA02C /* Frameworks */,
+				B2F131382E366074005AA02C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B2F1313F2E366074005AA02C /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				B2F1313B2E366074005AA02C /* ShiftTestsWithXCT */,
+			);
+			name = ShiftTestsWithXCT;
+			packageProductDependencies = (
+			);
+			productName = ShiftTestsByXCT;
+			productReference = B2F1313A2E366074005AA02C /* ShiftTestsWithXCT.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -180,6 +225,10 @@
 						CreatedOnToolsVersion = 16.4;
 					};
 					B2F12C572E1AB85F005AA02C = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = B25DBB312E14245E0077CB8F;
+					};
+					B2F131392E366074005AA02C = {
 						CreatedOnToolsVersion = 16.4;
 						TestTargetID = B25DBB312E14245E0077CB8F;
 					};
@@ -200,7 +249,8 @@
 			projectRoot = "";
 			targets = (
 				B25DBB312E14245E0077CB8F /* Shift */,
-				B2F12C572E1AB85F005AA02C /* ShiftTests */,
+				B2F12C572E1AB85F005AA02C /* ShiftTestsWithST */,
+				B2F131392E366074005AA02C /* ShiftTestsWithXCT */,
 			);
 		};
 /* End PBXProject section */
@@ -217,6 +267,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		B2F12C562E1AB85F005AA02C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2F131382E366074005AA02C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -306,6 +363,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B2F131362E366074005AA02C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -313,6 +377,11 @@
 			isa = PBXTargetDependency;
 			target = B25DBB312E14245E0077CB8F /* Shift */;
 			targetProxy = B2F12C5C2E1AB85F005AA02C /* PBXContainerItemProxy */;
+		};
+		B2F1313F2E366074005AA02C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B25DBB312E14245E0077CB8F /* Shift */;
+			targetProxy = B2F1313E2E366074005AA02C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -520,7 +589,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.ShiftTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ShiftTestsWithST;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -543,7 +612,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.ShiftTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ShiftTestsWithST;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -552,6 +621,44 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Shift.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Shift";
+			};
+			name = Release;
+		};
+		B2F131402E366074005AA02C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S9449RGK8C;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ShiftTestsWithXCT;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Shift.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Shift";
+			};
+			name = Debug;
+		};
+		B2F131412E366074005AA02C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S9449RGK8C;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ShiftTestsWithXCT;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Shift.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Shift";
 			};
 			name = Release;
@@ -577,11 +684,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B2F12C602E1AB85F005AA02C /* Build configuration list for PBXNativeTarget "ShiftTests" */ = {
+		B2F12C602E1AB85F005AA02C /* Build configuration list for PBXNativeTarget "ShiftTestsWithST" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B2F12C5E2E1AB85F005AA02C /* Debug */,
 				B2F12C5F2E1AB85F005AA02C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B2F131422E366074005AA02C /* Build configuration list for PBXNativeTarget "ShiftTestsWithXCT" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B2F131402E366074005AA02C /* Debug */,
+				B2F131412E366074005AA02C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

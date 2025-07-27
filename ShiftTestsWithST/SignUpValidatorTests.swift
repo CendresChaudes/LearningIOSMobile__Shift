@@ -1,6 +1,6 @@
 //
 //  SignUpValidator.swift
-//  ShiftTests
+//  ShiftTestsWithST
 //
 //  Created by Роман on 06.07.2025.
 //
@@ -190,10 +190,12 @@ struct SignUpValidatorTests {
 
         func dateWithYearsOffset(_ years: Int) -> String {
             let currentDate = Date()
+            
             var dateComponents = Calendar.current.dateComponents(
                 [.day, .month, .year],
                 from: currentDate
             )
+            
             dateComponents.year = (dateComponents.year ?? 0) - years
 
             guard let newDate = Calendar.current.date(from: dateComponents) else {
